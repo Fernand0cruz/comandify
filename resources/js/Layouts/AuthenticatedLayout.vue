@@ -15,7 +15,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
             <div>
                 <span class="fw-bold fs-4">Comandify</span>
             </div>
-            <button type="button" data-bs-dismiss="offcanvas">
+            <button type="button" class="btn" data-bs-dismiss="offcanvas">
                 <X />
             </button>
         </div>
@@ -25,7 +25,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                     <Link
                         :href="route('dashboard')"
                         data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2"
+                        class="btn btn-dark w-100 mb-2 p-2"
                         >Dashboard</Link
                     >
                 </li>
@@ -33,7 +33,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                     <Link
                         :href="route('dashboard')"
                         data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2"
+                        class="btn btn-dark w-100 mb-2 p-2"
                         >Products</Link
                     >
                 </li>
@@ -44,7 +44,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                     <Link
                         :href="route('dashboard')"
                         data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2"
+                        class="btn btn-dark w-100 mb-2 p-2"
                         >How to use</Link
                     >
                 </li>
@@ -52,7 +52,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                     <Link
                         :href="route('dashboard')"
                         data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2"
+                        class="btn btn-dark w-100 mb-2 p-2"
                         >Settings</Link
                     >
                 </li>
