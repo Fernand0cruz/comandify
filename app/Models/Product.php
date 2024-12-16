@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -29,5 +29,12 @@ class Products extends Model
     public function scopeAvailable($query)
     {
         return $query->where('is_available', true);
+    }
+
+    public function orderSlips()
+    {
+        return $this->belongsToMany(OrderSlip::class, 'order_product')
+            ->withPivot('quantity', 'price')
+            ->withTimestamps();
     }
 }
