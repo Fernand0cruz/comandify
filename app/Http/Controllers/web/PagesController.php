@@ -15,8 +15,13 @@ class PagesController extends Controller
         ]);
     }
 
-    public function Dashboard()
+    public function OrderSlip()
     {
-        return Inertia::render('Dashboard');
+        return Inertia::render('OrderSlip');
+    }
+
+    public function Product()
+    {
+        return Inertia::render('Product/Product');
     }
 }

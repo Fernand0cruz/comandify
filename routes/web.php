@@ -7,7 +7,8 @@ use App\Http\Controllers\Web\PagesController;
 Route::get('/', [PagesController::class, 'Welcome'])->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', [PagesController::class, 'Dashboard'])->name('dashboard');
+    Route::get('/order-slip', [PagesController::class, 'OrderSlip'])->name('order-slip');
+    Route::get('/product', [PagesController::class, 'Product'])->name('product');
 });
 
 Route::middleware('auth')->group(function () {

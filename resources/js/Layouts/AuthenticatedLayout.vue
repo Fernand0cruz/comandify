@@ -1,4 +1,5 @@
 <script setup>
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link } from "@inertiajs/vue3";
 import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
 </script>
@@ -7,9 +8,10 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
     <div
         class="offcanvas offcanvas-start"
         data-bs-scroll="true"
+        data-bs-backdrop="false"
         tabindex="-1"
-        id="offcanvasWithBothOptions"
-        aria-labelledby="offcanvasWithBothOptionsLabel"
+        id="offcanvasScrolling"
+        aria-labelledby="offcanvasScrolling"
     >
         <div class="offcanvas-header d-flex justify-content-between">
             <div>
@@ -22,39 +24,55 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
         <div class="offcanvas-body d-flex flex-column">
             <ul class="list-unstyled mb-auto">
                 <li>
-                    <Link
-                        :href="route('dashboard')"
-                        data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2 p-2"
-                        >Dashboard</Link
+                    <a
+                        :href="route('order-slip')"
+                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
+                        Comandas
+                    </a>
                 </li>
                 <li>
-                    <Link
-                        :href="route('dashboard')"
-                        data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2 p-2"
-                        >Products</Link
+                    <a
+                        :href="route('product')"
+                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
+                        Produtos
+                    </a>
+                </li>
+                <li>
+                    <a
+                        :href="route('product')"
+                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
+                    >
+                        Relatórios
+                    </a>
+                </li>
+                <li>
+                    <a
+                        :href="route('product')"
+                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
+                    >
+                        Notas
+                    </a>
                 </li>
             </ul>
 
             <ul class="list-unstyled mt-auto">
                 <li>
-                    <Link
-                        :href="route('dashboard')"
-                        data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2 p-2"
-                        >How to use</Link
+                    <a
+                        :href="route('product')"
+                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
+                        Como usar
+                    </a>
                 </li>
                 <li>
-                    <Link
-                        :href="route('dashboard')"
-                        data-bs-dismiss="offcanvas"
-                        class="btn btn-dark w-100 mb-2 p-2"
-                        >Settings</Link
+                    <a
+                        :href="route('product')"
+                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
+                        Configurações
+                    </a>
                 </li>
             </ul>
         </div>
@@ -65,24 +83,26 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
             class="bg-dark p-3 shadow d-flex justify-content-between align-items-center"
         >
             <div class="d-flex align-items-center gap-3">
-                <button
+                <PrimaryButton
                     class="btn btn-dark border text-white d-flex align-items-center"
                     type="button"
                     data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasWithBothOptions"
-                    aria-controls="offcanvasWithBothOptions"
+                    data-bs-target="#offcanvasScrolling"
+                    aria-controls="offcanvasScrolling"
                 >
                     <Menu class="me-2" /> Menu
-                </button>
+                </PrimaryButton>
                 <div>
                     <span class="fw-bold fs-4 text-white">Comandify</span>
                 </div>
             </div>
             <Link
                 :href="route('logout')"
+                as="button"
                 method="post"
-                class="btn btn-dark border text-white d-flex align-items-center"
-                ><ArrowRightFromLine class="me-2" /> Log Out
+                class="inline-flex border btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
+            >
+                <ArrowRightFromLine class="me-2" /> Log Out
             </Link>
         </header>
 
@@ -91,9 +111,3 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
         </main>
     </div>
 </template>
-
-<style scoped>
-.offcanvas-body {
-    padding-top: 1rem;
-}
-</style>
