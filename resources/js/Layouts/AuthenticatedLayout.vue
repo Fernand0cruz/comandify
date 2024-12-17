@@ -8,7 +8,6 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
     <div
         class="offcanvas offcanvas-start"
         data-bs-scroll="true"
-        data-bs-backdrop="false"
         tabindex="-1"
         id="offcanvasScrolling"
         aria-labelledby="offcanvasScrolling"
