@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 10, 2);
             $table->enum('category', ['appetizer', 'main_course', 'dessert', 'beverage'])->default('main_course');
+            $table->number('quantity');
             $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
