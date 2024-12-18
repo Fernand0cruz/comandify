@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_slip', function (Blueprint $table) {
+        Schema::create('order_slips', function (Blueprint $table) {
             $table->id();
             $table->string('order_number')->unique();
             $table->string('customer_name');
