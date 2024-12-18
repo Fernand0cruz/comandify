@@ -14,7 +14,7 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
     <AuthenticatedLayout>
         <section>
             <div class="mb-3">
-                <h2 class="text-2xl font-semibold">Comandas</h2>
+                <h2>Comandas</h2>
                 <div class="d-flex justify-content-between align-items-center">
                     <span>Comandas abertas: 15</span>
                     <PrimaryButton class="d-flex align-items-center gap-3">

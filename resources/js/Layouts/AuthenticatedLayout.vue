@@ -24,7 +24,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
             <ul class="list-unstyled mb-auto">
                 <li>
                     <a
-                        :href="route('order-slip')"
+                        :href="route('order-slip.index')"
                         class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
                         Comandas
@@ -32,7 +32,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                 </li>
                 <li>
                     <a
-                        :href="route('product')"
+                        :href="route('product.index')"
                         class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
                         Produtos
@@ -40,7 +40,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                 </li>
                 <li>
                     <a
-                        :href="route('product')"
+                        :href="route('product.index')"
                         class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
                         Relatórios
@@ -48,7 +48,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                 </li>
                 <li>
                     <a
-                        :href="route('product')"
+                        :href="route('product.index')"
                         class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
                         Notas
@@ -59,7 +59,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
             <ul class="list-unstyled mt-auto">
                 <li>
                     <a
-                        :href="route('product')"
+                        :href="route('product.index')"
                         class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
                         Como usar
@@ -67,7 +67,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                 </li>
                 <li>
                     <a
-                        :href="route('product')"
+                        :href="route('product.index')"
                         class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white w-100 mb-2"
                     >
                         Configurações
@@ -76,7 +76,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
             </ul>
         </div>
     </div>
-
+    
     <div>
         <header
             class="bg-dark p-3 shadow d-flex justify-content-between align-items-center"

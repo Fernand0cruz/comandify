@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\OrderSlipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\PagesController;
+use App\Http\Controllers\ProductController;
+
 
 Route::get('/', [PagesController::class, 'Welcome'])->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/order-slip', [PagesController::class, 'OrderSlip'])->name('order-slip');
-    Route::get('/product', [PagesController::class, 'Product'])->name('product');
+    Route::resource('order-slip', OrderSlipController::class);
+    Route::resource('product', ProductController::class);
 });
 
 Route::middleware('auth')->group(function () {

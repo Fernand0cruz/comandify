@@ -14,14 +14,4 @@ class PagesController extends Controller
             'canRegister' => Route::has('register'),
         ]);
     }
-
-    public function OrderSlip()
-    {
-        return Inertia::render('OrderSlip');
-    }
-
-    public function Product()
-    {
-        return Inertia::render('Product/Product');
-    }
 }

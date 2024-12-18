@@ -1,25 +1,35 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ClipboardCheck } from "lucide-vue-next";
+import { ClipboardCheck, X } from "lucide-vue-next";
+import { useForm } from "@inertiajs/vue3";
+import DangerButton from "@/Components/DangerButton.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue";
+import TextAreaInput from "@/Components/TextAreaInput.vue";
+import NumberInput from "@/Components/NumberInput.vue";
+import { defineProps } from "vue";
 
-const products = ref([ ]);
-
-const selectedCategory = ref(null);
-
-const filteredProducts = computed(() => {
-    if (!selectedCategory.value) {
-        return products.value;
-    }
-    return products.value.filter(
-        (product) => product.category === selectedCategory.value
-    );
+const props = defineProps({
+    categories: Array,
+    products: Array,
 });
 
-const filterByCategory = (category) => {
-    selectedCategory.value =
-        selectedCategory.value === category ? null : category;
+const products = ref(props.products);
+const categories = ref(props.categories);
+
+const form = useForm({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    quantity: "",
+});
+
+const submit = () => {
+    form.post("/produtos");
 };
 </script>
 
@@ -29,41 +39,24 @@ const filterByCategory = (category) => {
             <div class="mb-3">
                 <h2>Lista de Produtos</h2>
             </div>
-            <div class="mb-3 d-md-flex justify-content-between align-items-center">
-                <div v-show="products.length > 0">
-                    <span class="me-2 fw-bold">Filtrar por Categoria:</span>
-                    <button
-                        v-for="category in [
-                            ...new Set(products.map((p) => p.category)),
-                        ]"
-                        :key="category"
-                        class="btn btn-sm me-2"
-                        :class="{
-                            'btn-primary': selectedCategory === category,
-                            'btn-outline-primary':
-                                selectedCategory !== category,
-                        }"
-                        @click="filterByCategory(category)"
-                    >
-                        {{ category }}
-                    </button>
-                    <button
-                        class="btn btn-sm btn-outline-secondary"
-                        @click="selectedCategory = null"
-                    >
-                        Limpar Filtro
-                    </button>
-                </div>
-                <PrimaryButton class="d-flex align-items-center gap-3 mt-3 mt-md-0">
+            <div
+                class="mb-3 d-md-flex justify-content-between align-items-center"
+            >
+                <PrimaryButton
+                    class="d-flex align-items-center gap-3 mt-3 mt-md-0"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
                     <ClipboardCheck />
                     Criar Produto
                 </PrimaryButton>
             </div>
+
             <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle">
                     <thead class="table-light">
                         <tr>
-                            <th>#</th>
+                            <th>#xxx</th>
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Preço</th>
@@ -74,28 +67,22 @@ const filterByCategory = (category) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            v-for="(product, index) in filteredProducts"
-                            :key="product.id"
-                        >
-                            <td>{{ index + 1 }}</td>
+                        <tr v-for="product in products" :key="product.id">
+                            <td>#{{ product.id }}</td>
                             <td>{{ product.name }}</td>
                             <td>
                                 <div
                                     class="text-truncate"
-                                    style="max-width: 250px"
+                                    style="max-width: 350px"
                                     :title="product.description"
                                 >
                                     {{ product.description }}
                                 </div>
                             </td>
-                            <td>R$ {{ product.price.toFixed(2) }}</td>
+                            <td>R$ {{ product.price }}</td>
                             <td>
-                                <span
-                                    class="text-primary text-decoration-underline cursor-pointer"
-                                    @click="filterByCategory(product.category)"
-                                >
-                                    {{ product.category }}
+                                <span>
+                                    {{ product.category.name }}
                                 </span>
                             </td>
                             <td>{{ product.quantity }}</td>
@@ -103,12 +90,12 @@ const filterByCategory = (category) => {
                                 <span
                                     class="badge py-2 px-4 rounded-5"
                                     :class="
-                                        product.isAvailable
+                                        product.is_available
                                             ? 'bg-success'
                                             : 'bg-danger'
                                     "
                                 >
-                                    {{ product.isAvailable ? "Sim" : "Não" }}
+                                    {{ product.is_available ? "Sim" : "Nao" }}
                                 </span>
                             </td>
                             <td class="text-center">
@@ -120,13 +107,153 @@ const filterByCategory = (category) => {
                                 </PrimaryButton>
                             </td>
                         </tr>
-                        <tr v-if="filteredProducts.length === 0">
+                        <tr v-if="products.length === 0">
                             <td colspan="8" class="text-center text-muted p-3">
                                 Nenhum produto disponível.
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <div
+                class="modal fade"
+                id="staticBackdrop"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div
+                            class="modal-header d-flex justify-content-between"
+                        >
+                            <h5 class="modal-title" id="staticBackdropLabel">
+                                Criar Produto
+                            </h5>
+                            <button
+                                type="button"
+                                class="btn"
+                                data-bs-dismiss="modal"
+                                aria-label="Fechar"
+                            >
+                                <X />
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form @submit.prevent="submit">
+                                <div class="mb-3">
+                                    <InputLabel for="name" value="Nome" />
+                                    <TextInput
+                                        id="name"
+                                        type="text"
+                                        class="form-control"
+                                        v-model="form.name"
+                                        required
+                                        autofocus
+                                    />
+                                    <InputError
+                                        class="mt-2 text-danger"
+                                        :message="form.errors.name"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <InputLabel
+                                        for="description"
+                                        value="Descrição"
+                                    />
+                                    <TextAreaInput
+                                        id="description"
+                                        class="form-control"
+                                        v-model="form.description"
+                                        rows="4"
+                                        required
+                                    />
+                                    <InputError
+                                        class="mt-2 text-danger"
+                                        :message="form.errors.description"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <InputLabel for="price" value="Preço" />
+                                    <TextInput
+                                        id="price"
+                                        class="form-control"
+                                        v-model="form.price"
+                                        v-mask="[
+                                            'R$ #,##',
+                                            'R$ ##,##',
+                                            'R$ ###,##',
+                                            'R$ #.###,##',
+                                            'R$ ##.###,##',
+                                        ]"
+                                        required
+                                    />
+                                    <InputError
+                                        class="mt-2 text-danger"
+                                        :message="form.errors.price"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <InputLabel
+                                        for="quantity"
+                                        value="Quantidade"
+                                    />
+                                    <NumberInput
+                                        id="quantity"
+                                        type="number"
+                                        class="form-control"
+                                        v-model="form.quantity"
+                                        required
+                                    />
+                                    <InputError
+                                        class="mt-2 text-danger"
+                                        :message="form.errors.quantity"
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <InputLabel
+                                        for="category"
+                                        value="Categoria"
+                                    />
+                                    <select
+                                        id="category"
+                                        class="form-control rounded-0"
+                                        v-model="form.category"
+                                        required
+                                    >
+                                        <option disabled value="">
+                                            Selecione a categoria
+                                        </option>
+                                        <option
+                                            v-for="category in categories"
+                                            :key="category"
+                                            :value="category"
+                                        >
+                                            {{ category.name }}
+                                        </option>
+                                    </select>
+                                    <InputError
+                                        class="mt-2 text-danger"
+                                        :message="form.errors.category"
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <DangerButton
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Fechar
+                            </DangerButton>
+                            <PrimaryButton type="submit">Criar</PrimaryButton>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>
@@ -141,5 +268,11 @@ const filterByCategory = (category) => {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+select:focus {
+    border-color: #343a40 !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 </style>
