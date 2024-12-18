@@ -25,7 +25,7 @@ const form = useForm({
     description: "",
     price: "",
     category: "",
-    quantity: "",
+    quantity: 0,
 });
 
 const submit = () => {
