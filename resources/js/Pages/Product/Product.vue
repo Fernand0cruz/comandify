@@ -18,7 +18,30 @@ const props = defineProps({
 });
 
 const products = ref(props.products);
-const categories = ref(props.categories);
+
+const categoryMapping = {
+    Appetizer: "Entrada",
+    Main_Course: "Prato Principal",
+    Dessert: "Sobremesa",
+    Beverage: "Bebida",
+};
+
+const categories = ref(
+    props.categories.map((category) => ({
+        ...category,
+        name: categoryMapping[category.name] || category.name,
+    }))
+);
+
+const translatedProducts = ref(
+    products.value.map(product => ({
+        ...product,
+        category: {
+            ...product.category,
+            name: categoryMapping[product.category.name] || product.category.name,
+        }
+    }))
+);
 
 const form = useForm({
     name: "",
@@ -67,7 +90,7 @@ const submit = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="product in products" :key="product.id">
+                        <tr v-for="product in translatedProducts" :key="product.id">
                             <td>#{{ product.id }}</td>
                             <td>{{ product.name }}</td>
                             <td>
