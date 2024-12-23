@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'description', 'price', 'quantity', 'is_available'];
+    protected $fillable = ['name', 'description', 'price', 'quantity', 'category_id', 'is_available'];
 
     public function orderSlips()
     {
