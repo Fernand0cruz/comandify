@@ -7,6 +7,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import VueTheMask from 'vue-the-mask';
+import "vue3-toastify/dist/index.css";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 

@@ -19,6 +19,7 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "lucide-vue-next": "^0.468.0",
-        "vue-the-mask": "^0.11.1"
+        "vue-the-mask": "^0.11.1",
+        "vue3-toastify": "^0.2.8"
     }
 }
