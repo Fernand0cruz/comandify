@@ -23,8 +23,9 @@ defineExpose({ focus: () => input.value.focus() });
         class="form-control border rounded-0"
         v-model="model"
         ref="input"
+        v-mask="['####']"
         autocomplete="off"
-        min="0"
+        min="1"
     />
 </template>
 
