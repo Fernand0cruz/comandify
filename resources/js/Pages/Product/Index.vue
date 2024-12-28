@@ -107,8 +107,7 @@ const handlePageChange = (page) => {
                 <h2>Produtos</h2>
                 <div class="d-flex justify-content-between align-items-center">
                     <span
-                        >Produtos cadastrados:
-                        {{ translatedProducts.length }}</span
+                        >Produtos cadastrados: {{ props.products.total }}</span
                     >
                     <Link
                         :href="route('product.create')"
