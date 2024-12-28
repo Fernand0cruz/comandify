@@ -29,11 +29,5 @@ defineExpose({
     ></textarea>
 </template>
 
-<style scoped>
-textarea:focus {
-    border-color: #343a40 !important;  
-    outline: none !important; 
-    box-shadow: none !important;  
-    resize: none;
-}
-</style>
+
+

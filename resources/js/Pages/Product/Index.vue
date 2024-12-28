@@ -1,26 +1,31 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { ref, toRefs, onMounted } from "vue";
+import { ref, toRefs, onMounted, computed } from "vue";
 import { ClipboardCheck } from "lucide-vue-next";
 import { Link, useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
 import DangerButton from "@/Components/DangerButton.vue";
 import ConfirmModal from "@/Components/ConfirmModal.vue";
+import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
-    products: Array,
+    products: Object,
     flash: Object,
 });
 
-const products = ref(props.products);
+const products = ref(props.products.data);
 const { flash } = toRefs(props);
 const isModalVisible = ref(false);
 const productToDelete = ref(null);
 
+const currentPage = ref(props.products.current_page);
+const lastPage = ref(props.products.last_page);
+
 const form = useForm({});
 
 onMounted(() => {
+    products.value = props.products.data;
+
     if (flash.value?.message) {
         toast.success(flash.value.message, {
             theme: "dark",
@@ -37,7 +42,7 @@ const categoryMapping = {
     Beverage: "Bebida",
 };
 
-const translatedProducts = ref(
+const translatedProducts = computed(() =>
     products.value.map((product) => ({
         ...product,
         category: {
@@ -76,6 +81,22 @@ const confirmDelete = () => {
 const cancelDelete = () => {
     productToDelete.value = null;
     isModalVisible.value = false;
+};
+
+const handlePageChange = (page) => {
+    console.log("Dados atualizados:", props.products);
+
+    currentPage.value = page;
+    form.get(route("product.index", { page }), {
+        onSuccess: ({ props }) => {
+            console.log("Dados atualizados:", props.products);
+            products.value = props.products.data;
+            lastPage.value = props.products.last_page;
+        },
+        onError: (errors) => {
+            console.error(errors);
+        },
+    });
 };
 </script>
 
@@ -147,7 +168,9 @@ const cancelDelete = () => {
                                     {{ product.is_available ? "Sim" : "Nao" }}
                                 </span>
                             </td>
-                            <td class="text-center d-flex justify-content-center gap-3">
+                            <td
+                                class="text-center d-flex justify-content-center gap-3"
+                            >
                                 <Link
                                     class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                                     :href="route('product.edit', product.id)"
@@ -155,7 +178,7 @@ const cancelDelete = () => {
                                     Editar
                                 </Link>
                                 <DangerButton @click="openDeleteModal(product)">
-                                    Deletar
+                                    Excluir
                                 </DangerButton>
                             </td>
                         </tr>
@@ -166,14 +189,21 @@ const cancelDelete = () => {
                         </tr>
                     </tbody>
                 </table>
-                <ConfirmModal
-                    :isVisible="isModalVisible"
-                    title="Confirmar Exclusão"
-                    message="Você tem certeza que deseja apagar este produto? Esta ação não pode ser desfeita."
-                    @confirm="confirmDelete"
-                    @cancel="cancelDelete"
-                />
             </div>
+            <Pagination
+                v-if="products.length > 0"
+                :currentPage="currentPage"
+                :lastPage="lastPage"
+                @page-change="handlePageChange"
+            />
+
+            <ConfirmModal
+                :isVisible="isModalVisible"
+                title="Confirmar Exclusão"
+                message="Você tem certeza que deseja excluir este produto? Esta ação não pode ser desfeita."
+                @confirm="confirmDelete"
+                @cancel="cancelDelete"
+            />
         </div>
     </AuthenticatedLayout>
 </template>

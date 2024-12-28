@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->paginate(25);
 
         return Inertia::render('Product/Index', ['products' => $products]);
     }
@@ -92,6 +92,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return to_route('product.index')->with('message','Produto apagado com sucesso!');
+        return to_route('product.index')->with('message','Produto excluir com sucesso!');
     }
 }

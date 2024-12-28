@@ -1,4 +1,4 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
+@import "bootstrap/dist/css/bootstrap.min.css";
 
 :root {
     --toastify-color-light: #fff;
@@ -8,38 +8,38 @@
     --toastify-color-warning: #f1c40f;
     --toastify-color-error: #e74c3c;
     --toastify-color-transparent: rgba(255, 255, 255, 0.7);
-  
+
     --toastify-icon-color-info: var(--toastify-color-info);
     --toastify-icon-color-success: var(--toastify-color-success);
     --toastify-icon-color-warning: var(--toastify-color-warning);
     --toastify-icon-color-error: var(--toastify-color-error);
-  
+
     --toastify-toast-width: 320px;
     --toastify-toast-background: #fff;
     --toastify-toast-min-height: 64px;
     --toastify-toast-max-height: 800px;
     --toastify-font-family: sans-serif;
     --toastify-z-index: 9999;
-  
+
     --toastify-text-color-light: #757575;
     --toastify-text-color-dark: #fff;
-  
+
     --toastify-text-color-info: #fff;
     --toastify-text-color-success: #fff;
     --toastify-text-color-warning: #fff;
     --toastify-text-color-error: #fff;
-  
+
     --toastify-spinner-color: #616161;
     --toastify-spinner-color-empty-area: #e0e0e0;
-  
+
     --toastify-color-progress-light: linear-gradient(
-      to right,
-      #4cd964,
-      #5ac8fa,
-      #007aff,
-      #34aadc,
-      #5856d6,
-      #ff2d55
+        to right,
+        #4cd964,
+        #5ac8fa,
+        #007aff,
+        #34aadc,
+        #5856d6,
+        #ff2d55
     );
 
     --toastify-color-progress-dark: #bb86fc;
@@ -47,4 +47,21 @@
     --toastify-color-progress-success: var(--toastify-color-success);
     --toastify-color-progress-warning: var(--toastify-color-warning);
     --toastify-color-progress-error: var(--toastify-color-error);
-  }
+}
+
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+input:focus {
+    border-color: #343a40 !important;
+}
+
+textarea:focus {
+    border-color: #343a40 !important;
+    resize: none;
+}

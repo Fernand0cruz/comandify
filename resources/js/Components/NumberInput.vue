@@ -28,11 +28,3 @@ defineExpose({ focus: () => input.value.focus() });
         min="1"
     />
 </template>
-
-<style scoped>
-input:focus {
-    border-color: #343a40 !important;  
-    outline: none !important; 
-    box-shadow: none !important;  
-}
-</style>
