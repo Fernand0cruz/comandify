@@ -10,7 +10,7 @@ class Product extends Model
 
     public function orderSlips()
     {
-        return $this->belongsToMany(OrderSlip::class, 'order_product')
+        return $this->belongsToMany(OrderSlip::class, 'order_product', 'product_id', 'order_slip_id')
             ->withTimestamps();
     }
 

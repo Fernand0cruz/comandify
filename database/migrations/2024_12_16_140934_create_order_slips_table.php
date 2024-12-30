@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('order_slips', function (Blueprint $table) {
             $table->id();
-            $table->string('order_number')->unique();
+            $table->string('order_number')->unique()->autoIncrement();
             $table->string('customer_name');
             $table->integer('table_number');
             $table->text('notes')->nullable();
