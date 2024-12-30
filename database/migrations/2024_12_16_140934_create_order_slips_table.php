@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_number')->unique()->autoIncrement();
             $table->string('customer_name');
-            $table->integer('table_number');
+            $table->integer('table_number')->Unique();
             $table->text('notes')->nullable();
             $table->enum('status', ['pending', 'preparing', 'served', 'paid', 'cancelled'])->default('pending');
             $table->decimal('total_price', 10, 2);
