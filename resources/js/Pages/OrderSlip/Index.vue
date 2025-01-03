@@ -44,7 +44,7 @@ onMounted(() => {
                     </Link>
                 </div>
             </div>
-            <div v-if="props.orderSlips.length === 0" class="alert alert-info">
+            <div v-if="props.orderSlips.length === 0">
                 Não há comandas abertas no momento.
             </div>
             <div v-else class="row g-4">
