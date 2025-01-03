@@ -34,14 +34,14 @@ defineProps({
                                 :href="route('login')"
                                 class="text-white text-decoration-none"
                             >
-                                Log in
+                                Entrar
                             </Link>
                             <Link
                                 v-if="canRegister"
                                 :href="route('register')"
                                 class="text-white text-decoration-none"
                             >
-                                Register
+                                Registrar
                             </Link>
                         </template>
                     </div>

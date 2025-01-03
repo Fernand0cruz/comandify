@@ -32,7 +32,7 @@ const submit = () => {
     <GuestLayout>
         <form @submit.prevent="submit">
             <div class="mb-3">
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-mail" />
 
                 <TextInput
                     id="email"
@@ -46,7 +46,7 @@ const submit = () => {
             </div>
 
             <div class="mb-3">
-                <InputLabel for="password" value="Password" />
+                <InputLabel for="password" value="Senha" />
 
                 <TextInput
                     id="password"
@@ -64,14 +64,14 @@ const submit = () => {
                     :href="route('password.request')"
                     class="text-muted text-decoration-none me-3"
                 >
-                    Forgot your password?
+                    Esqueceu sua senha?
                 </Link>
 
                 <PrimaryButton
                     :class="{ 'disabled': form.processing }"
                     :disabled="form.processing"
                 >
-                    Log in
+                    Entrar
                 </PrimaryButton>
             </div>
         </form>

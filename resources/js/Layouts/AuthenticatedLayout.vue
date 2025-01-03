@@ -101,11 +101,11 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
                 method="post"
                 class="inline-flex border btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
             >
-                <ArrowRightFromLine class="me-2" /> Log Out
+                <ArrowRightFromLine class="me-2" /> Sair
             </Link>
         </header>
 
-        <main class="container-fluid py-3 bg-light">
+        <main class="container-fluid py-3">
             <slot />
         </main>
     </div>
