@@ -94,7 +94,6 @@ const submit = () => {
                             class="form-control"
                             v-model="form.notes"
                             rows="10"
-                            required
                         />
                     </div>
 
