@@ -10,7 +10,7 @@ import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
     products: Object,
-    flash: Object,
+    flash: Object
 });
 
 const products = ref(props.products.data);
@@ -24,10 +24,8 @@ const lastPage = ref(props.products.last_page);
 const form = useForm({});
 
 onMounted(() => {
-    products.value = props.products.data;
-
-    if (flash.value?.message) {
-        toast.success(flash.value.message, {
+    if (flash.value?.success) {
+        toast.success(flash.value.success, {
             theme: "dark",
             position: "bottom-center",
             transition: "flip",
@@ -64,7 +62,7 @@ const confirmDelete = () => {
             onSuccess: () => {
                 form.get(route("product.index"));
                 productToDelete.value = null;
-                toast.success(flash.value?.message, {
+                toast.success(flash.value?.success, {
                     theme: "dark",
                     position: "bottom-center",
                     transition: "flip",
@@ -84,12 +82,9 @@ const cancelDelete = () => {
 };
 
 const handlePageChange = (page) => {
-    console.log("Dados atualizados:", props.products);
-
     currentPage.value = page;
     form.get(route("product.index", { page }), {
         onSuccess: ({ props }) => {
-            console.log("Dados atualizados:", props.products);
             products.value = props.products.data;
             lastPage.value = props.products.last_page;
         },
@@ -134,10 +129,10 @@ const handlePageChange = (page) => {
                     </thead>
                     <tbody>
                         <tr
-                            v-for="product in translatedProducts"
+                            v-for="(product, index) in translatedProducts"
                             :key="product.id"
                         >
-                            <td>#{{ product.id }}</td>
+                            <td>#{{ index + 1 }}</td>
                             <td>{{ product.name }}</td>
                             <td>
                                 <div

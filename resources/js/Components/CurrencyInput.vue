@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineProps, defineEmits, defineExpose } from "vue";
+import { ref, onMounted } from "vue";
 
 const model = defineProps({
     modelValue: {

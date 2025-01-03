@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
 import PrimaryButton from "./PrimaryButton.vue";
 import DangerButton from "./DangerButton.vue";
 
