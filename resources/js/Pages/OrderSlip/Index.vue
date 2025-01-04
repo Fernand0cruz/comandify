@@ -1,8 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {
-    MousePointerSquareDashed,
-    SidebarCloseIcon,
     ClipboardCheck,
 } from "lucide-vue-next";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -54,40 +52,63 @@ onMounted(() => {
                     v-for="(orderSlip, index) in props.orderSlips"
                     :key="index"
                 >
-                    <div class="card border">
-                        <div class="card-header bg-dark text-white d-flex justify-content-between">
-                            <h5 class="mb-0">Comanda #{{ orderSlip.order_number }}</h5>
-                            <h5 class="mb-0">Mesa #{{ orderSlip.table_number }}</h5>
+                    <div>
+                        <div
+                            class="p-2 border-dark bg-dark text-white d-flex justify-content-between"
+                        >
+                            <span class="fs-5 fw-bold">
+                                Comanda #{{ orderSlip.order_number }}
+                            </span>
+                            <span class="fs-5 fw-bold">
+                                Mesa #{{ orderSlip.table_number }}
+                            </span>
                         </div>
-                        <div class="card-body">
-                            <h6 class="text-muted">{{ orderSlip.customer_name }}</h6>
-                            <ul class="list-group list-group-flush mb-3 overflow-auto" style="max-height: 200px; min-height: 200px;">
+                        <div class="border p-3">
+                            <span class="fs-5 fw-bold">
+                                {{ orderSlip.customer_name }}
+                            </span>
+                            <ul
+                                class="overflow-auto list-unstyled"
+                                style="max-height: 200px; min-height: 200px"
+                            >
                                 <li
-                                    class="list-group-item d-flex justify-content-between align-items-center"
-                                    v-for="(product, index) in orderSlip.products"
+                                    class="py-1 border-bottom d-flex justify-content-between"
+                                    v-for="(
+                                        product, index
+                                    ) in orderSlip.products"
                                     :key="index"
                                 >
-                                    <span>{{ product.pivot.quantity }} - {{ product.name }}</span>
-                                    <span class="fw-bold">R$ {{ product.price }}</span>
+                                    <span
+                                        >{{ product.pivot.quantity }} x
+                                        {{ product.name }} - R$ {{product.price}}</span
+                                    >
+                                    <span class="fw-bold"
+                                        >R$ {{ (product.pivot.quantity*product.price).toFixed(2) }}</span
+                                    >
                                 </li>
                             </ul>
                             <div class="mb-3">
                                 <h6>Observações:</h6>
-                                <div class="border rounded p-2 bg-light overflow-auto" style="max-height: 150px; min-height: 150px;">
+                                <div
+                                    class="border p-2 bg-light overflow-auto"
+                                    style="max-height: 150px; min-height: 150px"
+                                >
                                     <p class="mb-0">{{ orderSlip.notes }}</p>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6 class="mb-0">Total:</h6>
-                                <span class="fw-bold">R$ {{ orderSlip.total_price }}</span>
+                            <div
+                                class="d-flex justify-content-between align-items-center mb-3"
+                            >
+                                <span class="fs-5 fw-bold">Total:</span>
+                                <span class="fs-5 fw-bold"
+                                    >R$ {{ orderSlip.total_price }}</span
+                                >
                             </div>
-                            <div class="d-flex gap-2">
+                            <div class="d-flex gap-3">
                                 <PrimaryButton class="btn btn-primary w-100">
-                                    <MousePointerSquareDashed />
                                     Adicionar Produto
-                                </PrimaryButton>
+                                </PrimaryButton>q
                                 <PrimaryButton class="btn btn-primary w-100">
-                                    <SidebarCloseIcon />
                                     Finalizar Comanda
                                 </PrimaryButton>
                             </div>
@@ -99,14 +120,7 @@ onMounted(() => {
     </AuthenticatedLayout>
 </template>
 
-
 <style scoped>
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .overflow-auto {
     overflow-y: auto;
 }

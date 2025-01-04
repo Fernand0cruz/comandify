@@ -41,7 +41,7 @@ const submit = () => {
     form.post(route("order-slip.store"), {
         preserveScroll: true,
         onSuccess: () => {
-            form.reset();
+            // form.reset();
         },
         onError: (erro) => {
             console.error(erro);
