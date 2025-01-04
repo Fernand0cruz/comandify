@@ -11,25 +11,23 @@ import { toRefs } from "vue";
 import { watch } from "vue";
 import { toast } from "vue3-toastify";
 
+
 const props = defineProps({
     flash: Object,
 });
 
 const { flash } = toRefs(props);
 
-watch(
-    () => flash.value?.error,
-    (newError, oldError) => {
-        if (newError && newError !== oldError) {
-            toast.error(newError, {
-                theme: "dark",
-                position: "bottom-center",
-                transition: "flip",
-            });
-            flash.value.error = null;
-        }
+watch(() => flash.value, (value) => {
+    if (value?.error) {
+        toast.error(value.error, {
+            theme: "dark",
+            position: "bottom-center",
+            transition: "flip",
+        });
+        value.error = null;
     }
-);
+});
 
 const form = useForm({
     customer_name: "",
@@ -39,7 +37,6 @@ const form = useForm({
 
 const submit = () => {
     form.post(route("order-slip.store"), {
-        preserveScroll: true,
         onSuccess: () => {
             // form.reset();
         },
