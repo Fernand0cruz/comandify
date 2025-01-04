@@ -24,6 +24,7 @@ onMounted(() => {
             position: "bottom-center",
             transition: "flip",
         });
+        flash.value.success = null;
     }
 });
 </script>

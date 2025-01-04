@@ -30,6 +30,7 @@ onMounted(() => {
             position: "bottom-center",
             transition: "flip",
         });
+        flash.value.success = null;
     }
 });
 
@@ -67,6 +68,7 @@ const confirmDelete = () => {
                     position: "bottom-center",
                     transition: "flip",
                 });
+                flash.value.success = null;
             },
             onError: (erro) => {
                 console.error(erro);

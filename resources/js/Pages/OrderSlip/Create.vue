@@ -26,7 +26,6 @@ watch(
                 position: "bottom-center",
                 transition: "flip",
             });
-
             flash.value.error = null;
         }
     }
