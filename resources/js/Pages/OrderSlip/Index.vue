@@ -4,16 +4,22 @@ import {
     ClipboardCheck,
 } from "lucide-vue-next";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
 import { toRefs, onMounted } from "vue";
+import ConfirmModal from "@/Components/ConfirmModal.vue";
+import { ref } from "vue";
 
 const props = defineProps({
     orderSlips: Array,
     flash: Object,
 });
 
+const form = useForm({});
+
 const { flash } = toRefs(props);
+const isModalVisible = ref(false);
+const orderSlipToDelete = ref(null);
 
 onMounted(() => {
     if (flash.value?.success) {
@@ -25,6 +31,37 @@ onMounted(() => {
         flash.value.success = null;
     }
 });
+
+const openDeleteModal = (orderSlip) => {
+    orderSlipToDelete.value = orderSlip;
+    isModalVisible.value = true;
+};
+
+const cancelDelete = () => {
+    orderSlipToDelete.value = null;
+    isModalVisible.value = false;
+};
+
+const confirmDelete = () => {
+    if (orderSlipToDelete.value) {
+        form.delete(route("order-slip.destroy", orderSlipToDelete.value.id), {
+            onSuccess: () => {
+                form.get(route("order-slip.index"));
+                orderSlipToDelete.value = null;
+                toast.success(flash.value?.success, {
+                    theme: "dark",
+                    position: "bottom-center",
+                    transition: "flip",
+                });
+                flash.value.success = null;
+            },
+            onError: (erro) => {
+                console.error(erro);
+            },
+        });
+    }
+    isModalVisible.value = false;
+};
 </script>
 
 <template>
@@ -107,8 +144,8 @@ onMounted(() => {
                             <div class="d-flex gap-3">
                                 <PrimaryButton class="btn btn-primary w-100">
                                     Adicionar Produto
-                                </PrimaryButton>q
-                                <PrimaryButton class="btn btn-primary w-100">
+                                </PrimaryButton>
+                                <PrimaryButton class="btn btn-primary w-100" @click="openDeleteModal(orderSlip)">
                                     Finalizar Comanda
                                 </PrimaryButton>
                             </div>
@@ -116,6 +153,13 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
+            <ConfirmModal
+                :isVisible="isModalVisible"
+                title="Confirmar Exclusão de Comanda"
+                message="Você tem certeza que deseja excluir esta comanda? Esta ação não pode ser desfeita."
+                @confirm="confirmDelete"
+                @cancel="cancelDelete"
+            />
         </div>
     </AuthenticatedLayout>
 </template>

@@ -93,8 +93,10 @@ class OrderSlipController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(OrderSlip $orderSlip)
     {
-        //
+        $orderSlip->delete();
+
+        return to_route('order-slip.index')->with('success','Comanda excluida com sucesso!');
     }
 }
