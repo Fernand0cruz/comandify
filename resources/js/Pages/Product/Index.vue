@@ -132,9 +132,9 @@ const handlePageChange = (page) => {
                     <tbody>
                         <tr
                             v-for="(product, index) in translatedProducts"
-                            :key="product.id"
+                            :key="index"
                         >
-                            <td>#{{ index + 1 }}</td>
+                        <td>#{{ (currentPage - 1) * 25 + index + 1 }}</td>
                             <td>{{ product.name }}</td>
                             <td>
                                 <div
