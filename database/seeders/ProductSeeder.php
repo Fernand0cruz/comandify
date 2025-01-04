@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
                 'is_available' => true,
             ],
             [
-                'name' => 'Coca-Cola 250ml',
+                'name' => ' Ref. Coca-Cola 250ml',
                 'description' => 'Refrigerante clássico, perfeito para acompanhar qualquer refeição.',
                 'price' => 5.00,
                 'category_id' => 4, // Beverage
@@ -150,7 +150,7 @@ class ProductSeeder extends Seeder
                 'is_available' => true,
             ],
             [
-                'name' => 'Refrigerante Guaraná 350ml',
+                'name' => 'Ref. Guaraná 350ml',
                 'description' => 'Refrigerante com sabor brasileiro.',
                 'price' => 5.00,
                 'category_id' => 4, // Beverage
@@ -189,6 +189,71 @@ class ProductSeeder extends Seeder
                 'quantity' => 60,
                 'is_available' => true,
             ],
+            [
+                'name' => 'Yakissoba de Legumes',
+                'description' => 'Yakissoba vegetariano com legumes frescos.',
+                'price' => 30.00,
+                'category_id' => 2, // Main Course
+                'quantity' => 20,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Mousse de Chocolate',
+                'description' => 'Sobremesa cremosa de chocolate.',
+                'price' => 10.00,
+                'category_id' => 3, // Dessert
+                'quantity' => 30,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Cerveja Artesanal 500ml',
+                'description' => 'Cerveja artesanal gelada.',
+                'price' => 12.00,
+                'category_id' => 4, // Beverage
+                'quantity' => 50,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Risoto de Camarão',
+                'description' => 'Risoto cremoso com camarão.',
+                'price' => 40.00,
+                'category_id' => 2, // Main Course
+                'quantity' => 15,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Pavê de Chocolate',
+                'description' => 'Sobremesa de chocolate com biscoitos.',
+                'price' => 15.00,
+                'category_id' => 3, // Dessert
+                'quantity' => 25,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Café com Leite',
+                'description' => 'Café com leite quente e cremoso.',
+                'price' => 5.00,
+                'category_id' => 4, // Beverage
+                'quantity' => 100,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Coxinha de Frango',
+                'description' => 'Coxinha de frango crocante e saborosa.',
+                'price' => 8.00,
+                'category_id' => 1, // Appetizer
+                'quantity' => 35,
+                'is_available' => true,
+            ],
+            [
+                'name' => 'Macarrão à Carbonara',
+                'description' => 'Macarrão com molho à base de ovos e bacon.',
+                'price' => 35.00,
+                'category_id' => 2, // Main Course
+                'quantity' => 20,
+                'is_available' => true,
+            ],
         ]);
     }
+    
 }
