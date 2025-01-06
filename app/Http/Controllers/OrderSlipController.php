@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderSlip;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Exception;
-use PhpParser\Error;
 
 class OrderSlipController extends Controller
 {
@@ -15,8 +14,9 @@ class OrderSlipController extends Controller
      */
     public function index()
     {
-        $orderSlips = OrderSlip::with('products')->get();
-        return Inertia::render('OrderSlip/Index', ['orderSlips' => $orderSlips]);
+        return Inertia::render('OrderSlip/Index', [
+            'orderSlips' => OrderSlip::with('products')->get(),
+        ]);
     }
 
     /**
@@ -79,7 +79,10 @@ class OrderSlipController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        Return Inertia::render('OrderSlip/Edit', [
+            'orderSlip' => OrderSlip::with('products')->findOrFail($id),
+            'products' => Product::where('is_available', 1)->select('id','name', 'price')->get(),
+        ]);
     }
 
     /**

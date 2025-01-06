@@ -1,8 +1,6 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {
-    ClipboardCheck,
-} from "lucide-vue-next";
+import { ClipboardCheck } from "lucide-vue-next";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { Link, useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
@@ -117,10 +115,17 @@ const confirmDelete = () => {
                                 >
                                     <span
                                         >{{ product.pivot.quantity }} x
-                                        {{ product.name }} - R$ {{product.price}}</span
+                                        {{ product.name }} - R$
+                                        {{ product.price }}</span
                                     >
                                     <span class="fw-bold"
-                                        >R$ {{ (product.pivot.quantity*product.price).toFixed(2) }}</span
+                                        >R$
+                                        {{
+                                            (
+                                                product.pivot.quantity *
+                                                product.price
+                                            ).toFixed(2)
+                                        }}</span
                                     >
                                 </li>
                             </ul>
@@ -142,10 +147,18 @@ const confirmDelete = () => {
                                 >
                             </div>
                             <div class="d-flex gap-3">
-                                <PrimaryButton class="btn btn-primary w-100">
+                                <Link
+                                    :href="
+                                        route('order-slip.edit', orderSlip.id)
+                                    "
+                                    class="w-100 btn bg-dark inline-flex rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
+                                >
                                     Adicionar Produto
-                                </PrimaryButton>
-                                <PrimaryButton class="btn btn-primary w-100" @click="openDeleteModal(orderSlip)">
+                                </Link>
+                                <PrimaryButton
+                                    class="w-100"
+                                    @click="openDeleteModal(orderSlip)"
+                                >
                                     Finalizar Comanda
                                 </PrimaryButton>
                             </div>
