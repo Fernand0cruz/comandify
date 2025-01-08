@@ -105,7 +105,7 @@ import { Menu, ArrowRightFromLine, X } from "lucide-vue-next";
             </Link>
         </header>
 
-        <main class="container-fluid py-3">
+        <main class="container-fluid py-5">
             <slot />
         </main>
     </div>
