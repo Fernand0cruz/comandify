@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->unsignedBigInteger('category_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
-            $table->boolean('is_available')->default(true);
             $table->timestamps();
         });
     }

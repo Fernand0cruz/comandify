@@ -81,7 +81,7 @@ class OrderSlipController extends Controller
     {
         Return Inertia::render('OrderSlip/Edit', [
             'orderSlip' => OrderSlip::with('products')->findOrFail($id),
-            'products' => Product::where('is_available', 1)->select('id','name', 'price')->get(),
+            'products' => Product::select('id','name', 'quantity', 'price')->get(),
         ]);
     }
 

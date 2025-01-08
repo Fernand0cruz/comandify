@@ -14,10 +14,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category')->paginate(25);
+        $products = Product::select('id', 'name', 'description', 'price', 'quantity', 'category_id')
+            ->with([
+                'category' => function ($query) {
+                    $query->select('id', 'name');
+                }
+            ])
+            ->paginate(25);
 
         return Inertia::render('Product/Index', ['products' => $products]);
     }
+
 
     /**
      * Show the form for creating a new resource.
