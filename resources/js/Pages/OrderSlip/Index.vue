@@ -103,7 +103,7 @@ const confirmDelete = () => {
                                 {{ orderSlip.customer_name }}
                             </span>
                             <ul
-                                class="overflow-auto list-unstyled"
+                                class="overflow-auto list-group list-group-flush"
                                 style="max-height: 200px; min-height: 200px"
                             >
                                 <li
