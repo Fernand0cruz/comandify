@@ -6,6 +6,7 @@ use App\Models\OrderSlip;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class OrderSlipController extends Controller
 {
@@ -39,10 +40,10 @@ class OrderSlipController extends Controller
         ]);
 
         $tableOccupied = OrderSlip::where('table_number', $validatedData['table_number'])
-        ->whereNotIn('status', ['paid', 'canceled'])
-        ->exists();
-        
-        if($tableOccupied){
+            ->whereNotIn('status', ['paid', 'canceled'])
+            ->exists();
+
+        if ($tableOccupied) {
             return to_route('order-slip.create')->with('error', 'Existe uma comanda aberta para esta mesa!');
         }
 
@@ -52,7 +53,7 @@ class OrderSlipController extends Controller
 
         $nextNumber = 1;
 
-        if($lastOrderSlip) {
+        if ($lastOrderSlip) {
             $lastSequence = substr($lastOrderSlip->order_number, -4);
             $nextNumber = $lastSequence + 1;
         }
@@ -79,9 +80,9 @@ class OrderSlipController extends Controller
      */
     public function edit(string $id)
     {
-        Return Inertia::render('OrderSlip/Edit', [
+        return Inertia::render('OrderSlip/Edit', [
             'orderSlip' => OrderSlip::with('products')->findOrFail($id),
-            'products' => Product::select('id','name', 'quantity', 'price')->get(),
+            'products' => Product::select('id', 'name', 'quantity', 'price')->get(),
         ]);
     }
 
@@ -90,9 +91,30 @@ class OrderSlipController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'products' => 'required|array',
+            'products.*.order_slip_id' => 'required|integer|exists:order_slips,id',
+            'products.*.product_id' => 'required|integer|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
+        ]);
+    
+        $orderSlip = OrderSlip::findOrFail($id);
+    
+        foreach ($validatedData['products'] as $product) {
+            if ($orderSlip->products->contains($product['product_id'])) {
+                $orderSlip->products()->updateExistingPivot($product['product_id'], [
+                    'quantity' => DB::raw('quantity + ' . $product['quantity']),
+                ]);
+            } else {
+                $orderSlip->products()->attach($product['product_id'], [
+                    'quantity' => $product['quantity'],
+                ]);
+            }
+        }
 
+        return to_route('order-slip.index')->with('success', 'Produto(s) atualizado(s) com sucesso!');
+    }
+    
     /**
      * Remove the specified resource from storage.
      */
@@ -100,6 +122,6 @@ class OrderSlipController extends Controller
     {
         $orderSlip->delete();
 
-        return to_route('order-slip.index')->with('success','Comanda excluida com sucesso!');
+        return to_route('order-slip.index')->with('success', 'Comanda excluida com sucesso!');
     }
 }
