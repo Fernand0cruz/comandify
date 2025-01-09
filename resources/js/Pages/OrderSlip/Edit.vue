@@ -107,7 +107,7 @@ const adjustQuantity = (product) => {
                             class="table-responsive"
                             style="max-height: 450px; min-height: 450px"
                         >
-                            <table class="table table-bordered">
+                            <table class="table table-bordered align-middle">
                                 <thead>
                                     <tr>
                                         <th>Produto</th>
@@ -122,6 +122,11 @@ const adjustQuantity = (product) => {
                                             product, index
                                         ) in filteredProducts"
                                         :key="index"
+
+                                        :class="{
+                                            'table-danger':
+                                                product.quantity === 0
+                                        }"
                                     >
                                         <td>{{ product.name }}</td>
                                         <td>{{ product.quantity }}</td>
