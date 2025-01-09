@@ -104,11 +104,11 @@ const adjustQuantity = (product) => {
                             />
                         </div>
                         <div
-                            class="table-responsive"
+                            class="table-responsive border"
                             style="max-height: 450px; min-height: 450px"
                         >
-                            <table class="table table-bordered align-middle">
-                                <thead>
+                            <table class="table table-borderless table-hover align-middle">
+                                <thead class="table-light">
                                     <tr>
                                         <th>Produto</th>
                                         <th>Quantidade</th>
