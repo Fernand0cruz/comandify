@@ -153,6 +153,9 @@ onMounted(() => {
                             v-if="!loading"
                             v-for="(product, index) in translatedProducts"
                             :key="index"
+                            :class="{
+                                'table-danger': product.quantity === 0,
+                            }"
                         >
                             <td>#{{ (currentPage - 1) * 25 + index + 1 }}</td>
                             <td class="text-nowrap">{{ product.name }}</td>
@@ -184,9 +187,7 @@ onMounted(() => {
                                     {{ product.quantity > 0 ? "Sim" : "Nao" }}
                                 </span>
                             </td>
-                            <td
-                                class="d-flex gap-3"
-                            >
+                            <td class="d-flex gap-3">
                                 <Link
                                     class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                                     :href="route('product.edit', product.id)"
