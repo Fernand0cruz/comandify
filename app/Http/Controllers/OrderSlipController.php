@@ -112,6 +112,14 @@ class OrderSlipController extends Controller
             }
         }
 
+        $orderSlip->load('products');
+
+        $totalPrice = $orderSlip->products->sum(function ($product) {
+            return $product->price * $product->pivot->quantity;
+        });
+
+        OrderSlip::where('id', $id)->update(['total_price' => $totalPrice]);
+
         return to_route('order-slip.index')->with('success', 'Produto(s) atualizado(s) com sucesso!');
     }
     
