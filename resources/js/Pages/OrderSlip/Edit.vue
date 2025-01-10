@@ -60,8 +60,15 @@ const adjustQuantity = (product) => {
                 <div class="border p-4 d-flex flex-column gap-5">
                     <div>
                         <div class="d-flex flex-column gap-4">
-                            <span class="fs-5 fw-bold">Cliente: {{ orderSlip.customer_name }}</span>
-                            <span class="fs-5 fw-bold"> Produtos </span>
+                            <span class="fs-5 fw-bold"
+                                >Cliente: {{ orderSlip.customer_name }}</span
+                            >
+                            <span class="fs-5 fw-bold"> Produtos: </span>
+                        </div>
+                        <div v-if="orderSlip.products.length === 0">
+                            <span class="text-center">
+                                Nenhum produto encontrado
+                            </span>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li
@@ -85,10 +92,13 @@ const adjustQuantity = (product) => {
                                 >
                             </li>
                         </ul>
-                        <div v-if="orderSlip.products.length === 0">
-                            <span class="text-center">
-                                Nenhum produto encontrado
-                            </span>
+                        <div
+                            class="d-flex justify-content-between align-items-center mt-4"
+                        >
+                            <span class="fs-5 fw-bold">Total:</span>
+                            <span class="fs-5 fw-bold"
+                                >R$ {{ orderSlip.total_price }}</span
+                            >
                         </div>
                     </div>
 
@@ -107,7 +117,9 @@ const adjustQuantity = (product) => {
                             class="table-responsive border"
                             style="max-height: 450px; min-height: 450px"
                         >
-                            <table class="table table-borderless table-hover align-middle">
+                            <table
+                                class="table table-borderless table-hover align-middle"
+                            >
                                 <thead class="table-light">
                                     <tr>
                                         <th>Produto</th>
@@ -122,10 +134,9 @@ const adjustQuantity = (product) => {
                                             product, index
                                         ) in filteredProducts"
                                         :key="index"
-
                                         :class="{
                                             'table-danger':
-                                                product.quantity === 0
+                                                product.quantity === 0,
                                         }"
                                     >
                                         <td>{{ product.name }}</td>
@@ -146,7 +157,7 @@ const adjustQuantity = (product) => {
                                         </td>
                                     </tr>
                                     <tr v-if="filteredProducts.length === 0">
-                                        <td colspan="3" class="text-center">
+                                        <td colspan="4" class="text-center">
                                             Nenhum produto encontrado
                                         </td>
                                     </tr>

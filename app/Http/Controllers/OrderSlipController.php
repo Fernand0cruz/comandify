@@ -120,7 +120,7 @@ class OrderSlipController extends Controller
 
         OrderSlip::where('id', $id)->update(['total_price' => $totalPrice]);
 
-        return to_route('order-slip.index')->with('success', 'Produto(s) atualizado(s) com sucesso!');
+        return to_route('order-slip.index')->with('success', 'Produto(s) adicionado(s) com sucesso!');
     }
     
     /**
