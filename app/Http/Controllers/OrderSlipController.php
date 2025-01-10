@@ -97,9 +97,9 @@ class OrderSlipController extends Controller
             'products.*.product_id' => 'required|integer|exists:products,id',
             'products.*.quantity' => 'required|integer|min:1',
         ]);
-    
+
         $orderSlip = OrderSlip::findOrFail($id);
-    
+
         foreach ($validatedData['products'] as $product) {
             if ($orderSlip->products->contains($product['product_id'])) {
                 $orderSlip->products()->updateExistingPivot($product['product_id'], [
@@ -110,9 +110,11 @@ class OrderSlipController extends Controller
                     'quantity' => $product['quantity'],
                 ]);
             }
-        }
 
-        $orderSlip->load('products');
+            $productModel = Product::findOrFail($product['product_id']);
+
+            $productModel->decrement('quantity', $product['quantity']);
+        }
 
         $totalPrice = $orderSlip->products->sum(function ($product) {
             return $product->price * $product->pivot->quantity;
@@ -122,7 +124,7 @@ class OrderSlipController extends Controller
 
         return to_route('order-slip.index')->with('success', 'Produto(s) adicionado(s) com sucesso!');
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
