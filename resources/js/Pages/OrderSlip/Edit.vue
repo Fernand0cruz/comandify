@@ -2,14 +2,14 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { ref, computed } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     orderSlip: Object,
     products: Array,
+    flash: Object
 });
-
-import { ref, computed } from "vue";
-import { useForm } from "@inertiajs/vue3";
 
 const searchQuery = ref("");
 
@@ -151,7 +151,7 @@ const adjustQuantity = (product) => {
                                                 v-model.number="
                                                     product.inputQuantity
                                                 "
-                                                @input="adjustQuantity(product)"
+                                              
                                                 :placeholder="'Qtd'"
                                             />
                                         </td>

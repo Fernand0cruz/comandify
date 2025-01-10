@@ -28,6 +28,14 @@ onMounted(() => {
         });
         flash.value.success = null;
     }
+    if (flash.value?.error) {
+        toast.error(flash.value.error, {
+            theme: "dark",
+            position: "bottom-center",
+            transition: "flip",
+        });
+        flash.value.error = null;
+    }
 });
 
 const openDeleteModal = (orderSlip) => {
