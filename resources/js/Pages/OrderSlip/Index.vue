@@ -14,26 +14,29 @@ const props = defineProps({
 });
 
 const form = useForm({});
-
 const { flash } = toRefs(props);
 const isModalVisible = ref(false);
 const orderSlipToDelete = ref(null);
 
+const showToast = (message, type = "success") => {
+    const options = {
+        theme: "dark",
+        position: "bottom-center",
+        transition: "flip",
+    };
+    type === "success"
+        ? toast.success(message, options)
+        : toast.error(message, options);
+};
+
 onMounted(() => {
     if (flash.value?.success) {
-        toast.success(flash.value.success, {
-            theme: "dark",
-            position: "bottom-center",
-            transition: "flip",
-        });
+        showToast(flash.value.success);
         flash.value.success = null;
     }
     if (flash.value?.error) {
-        toast.error(flash.value.error, {
-            theme: "dark",
-            position: "bottom-center",
-            transition: "flip",
-        });
+        console.log("Erro:", flash.value.error);
+        showToast(flash.value.error, "error");
         flash.value.error = null;
     }
 });
@@ -54,11 +57,7 @@ const confirmDelete = () => {
             onSuccess: () => {
                 form.get(route("order-slip.index"));
                 orderSlipToDelete.value = null;
-                toast.success(flash.value?.success, {
-                    theme: "dark",
-                    position: "bottom-center",
-                    transition: "flip",
-                });
+                showToast(flash.value.success);
                 flash.value.success = null;
             },
             onError: (erro) => {

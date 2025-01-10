@@ -4,7 +4,6 @@ import { ref, toRefs, onMounted, computed } from "vue";
 import { ClipboardCheck } from "lucide-vue-next";
 import { Link, useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import ConfirmModal from "@/Components/ConfirmModal.vue";
 import Pagination from "@/Components/Pagination.vue";

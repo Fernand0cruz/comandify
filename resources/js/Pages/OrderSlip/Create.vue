@@ -16,13 +16,20 @@ const props = defineProps({
 
 const { flash } = toRefs(props);
 
+const showToast = (message, type = "success") => {
+    const options = {
+        theme: "dark",
+        position: "bottom-center",
+        transition: "flip",
+    };
+    type === "success"
+        ? toast.success(message, options)
+        : toast.error(message, options);
+};
+
 watch(() => flash.value, (value) => {
-    if (value?.error) {
-        toast.error(value.error, {
-            theme: "dark",
-            position: "bottom-center",
-            transition: "flip",
-        });
+    if (flash.value?.error) {
+        showToast(flash.value.error, "error");
         value.error = null;
     }
 });
