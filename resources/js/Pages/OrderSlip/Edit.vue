@@ -151,7 +151,7 @@ const adjustQuantity = (product) => {
                                                 v-model.number="
                                                     product.inputQuantity
                                                 "
-                                              
+                                                @input="adjustQuantity(product)"
                                                 :placeholder="'Qtd'"
                                             />
                                         </td>
