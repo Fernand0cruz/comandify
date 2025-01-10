@@ -101,6 +101,12 @@ class OrderSlipController extends Controller
         $orderSlip = OrderSlip::findOrFail($id);
 
         foreach ($validatedData['products'] as $product) {
+            $productModel = Product::findOrFail($product['product_id']);
+
+            if ($productModel->quantity < $product['quantity']) {
+                return to_route('order-slip.index')->with('error', "Quantidade do produto {$productModel->name} inserido é inválida.");
+            }
+            
             if ($orderSlip->products->contains($product['product_id'])) {
                 $orderSlip->products()->updateExistingPivot($product['product_id'], [
                     'quantity' => DB::raw('quantity + ' . $product['quantity']),
@@ -111,10 +117,10 @@ class OrderSlipController extends Controller
                 ]);
             }
 
-            $productModel = Product::findOrFail($product['product_id']);
-
             $productModel->decrement('quantity', $product['quantity']);
         }
+
+        $orderSlip->load('products');
 
         $totalPrice = $orderSlip->products->sum(function ($product) {
             return $product->price * $product->pivot->quantity;
