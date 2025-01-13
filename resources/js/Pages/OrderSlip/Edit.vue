@@ -102,7 +102,7 @@ function formatCurrency(value) {
                         >
                             <span class="fs-5 fw-bold">Total:</span>
                             <span class="fs-5 fw-bold"
-                                >R$ {{ orderSlip.total_price }}</span
+                                >{{ formatCurrency(orderSlip.total_price) }}</span
                             >
                         </div>
                     </div>
