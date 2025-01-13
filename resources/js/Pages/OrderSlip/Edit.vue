@@ -8,7 +8,7 @@ import { useForm } from "@inertiajs/vue3";
 const props = defineProps({
     orderSlip: Object,
     products: Array,
-    flash: Object
+    flash: Object,
 });
 
 const searchQuery = ref("");
@@ -48,6 +48,12 @@ const adjustQuantity = (product) => {
         product.inputQuantity = product.quantity;
     }
 };
+function formatCurrency(value) {
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    }).format(value);
+}
 </script>
 
 <template>
@@ -78,16 +84,15 @@ const adjustQuantity = (product) => {
                             >
                                 <span
                                     >{{ product.pivot.quantity }} x
-                                    {{ product.name }} - R$
-                                    {{ product.price }}</span
+                                    {{ product.name }} -
+                                    {{ formatCurrency(product.price) }}</span
                                 >
-                                <span class="fw-bold"
-                                    >R$
+                                <span class="fw-bold">
                                     {{
-                                        (
+                                        formatCurrency(
                                             product.pivot.quantity *
-                                            product.price
-                                        ).toFixed(2)
+                                                product.price
+                                        )
                                     }}</span
                                 >
                             </li>
@@ -141,7 +146,7 @@ const adjustQuantity = (product) => {
                                     >
                                         <td>{{ product.name }}</td>
                                         <td>{{ product.quantity }}</td>
-                                        <td>R$ {{ product.price }}</td>
+                                        <td>{{ formatCurrency(product.price) }}</td>
                                         <td>
                                             <input
                                                 type="number"

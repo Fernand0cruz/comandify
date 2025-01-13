@@ -100,6 +100,13 @@ onMounted(() => {
         flash.value.success = null;
     }
 });
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    }).format(value);
+}
 </script>
 
 <template>
@@ -167,7 +174,7 @@ onMounted(() => {
                                     {{ product.description }}
                                 </div>
                             </td>
-                            <td class="text-nowrap">R$ {{ product.price }}</td>
+                            <td class="text-nowrap">{{formatCurrency(product.price)}}</td>
                             <td class="text-nowrap">
                                 <span>
                                     {{ product.category.name }}

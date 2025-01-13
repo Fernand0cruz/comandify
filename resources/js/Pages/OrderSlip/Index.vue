@@ -67,6 +67,12 @@ const confirmDelete = () => {
     }
     isModalVisible.value = false;
 };
+function formatCurrency(value) {
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    }).format(value);
+}
 </script>
 
 <template>
@@ -122,16 +128,17 @@ const confirmDelete = () => {
                                 >
                                     <span
                                         >{{ product.pivot.quantity }} x
-                                        {{ product.name }} - R$
-                                        {{ product.price }}</span
-                                    >
-                                    <span class="fw-bold"
-                                        >R$
+                                        {{ product.name }} -
                                         {{
-                                            (
+                                            formatCurrency(product.price)
+                                        }}</span
+                                    >
+                                    <span class="fw-bold">
+                                        {{
+                                            formatCurrency(
                                                 product.pivot.quantity *
-                                                product.price
-                                            ).toFixed(2)
+                                                    product.price
+                                            )
                                         }}</span
                                     >
                                 </li>
@@ -149,9 +156,9 @@ const confirmDelete = () => {
                                 class="d-flex justify-content-between align-items-center mb-3"
                             >
                                 <span class="fs-5 fw-bold">Total:</span>
-                                <span class="fs-5 fw-bold"
-                                    >R$ {{ orderSlip.total_price }}</span
-                                >
+                                <span class="fs-5 fw-bold">{{
+                                    formatCurrency(orderSlip.total_price)
+                                }}</span>
                             </div>
                             <div class="d-flex gap-3">
                                 <Link
