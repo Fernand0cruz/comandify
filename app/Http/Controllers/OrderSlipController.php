@@ -16,7 +16,7 @@ class OrderSlipController extends Controller
     public function index()
     {
         return Inertia::render('OrderSlip/Index', [
-            'orderSlips' => OrderSlip::with('products')->get(),
+            'orderSlips' => OrderSlip::with('products')->where('is_visible', true)->get(),
         ]);
     }
 
@@ -40,7 +40,7 @@ class OrderSlipController extends Controller
         ]);
 
         $tableOccupied = OrderSlip::where('table_number', $validatedData['table_number'])
-            ->whereNotIn('status', ['paid', 'canceled'])
+            ->where('is_visible', true)
             ->exists();
 
         if ($tableOccupied) {
@@ -106,7 +106,7 @@ class OrderSlipController extends Controller
             if ($productModel->quantity < $product['quantity']) {
                 return to_route('order-slip.index')->with('error', "Quantidade do produto {$productModel->name} inserido é inválida.");
             }
-            
+
             if ($orderSlip->products->contains($product['product_id'])) {
                 $orderSlip->products()->updateExistingPivot($product['product_id'], [
                     'quantity' => DB::raw('quantity + ' . $product['quantity']),
@@ -136,7 +136,8 @@ class OrderSlipController extends Controller
      */
     public function destroy(OrderSlip $orderSlip)
     {
-        $orderSlip->delete();
+        $orderSlip->is_visible = false;
+        $orderSlip->save();
 
         return to_route('order-slip.index')->with('success', 'Comanda excluida com sucesso!');
     }

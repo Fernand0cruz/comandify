@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderSlip extends Model
 {
-    protected $fillable = ['order_number', 'customer_name', 'table_number', 'notes', 'status', 'total_price'];
+    protected $fillable = ['order_number', 'customer_name', 'table_number', 'notes', 'is_visible', 'total_price'];
 
     public function products()
     {
