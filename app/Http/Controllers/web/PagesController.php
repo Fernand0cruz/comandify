@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
+use App\Models\OrderSlip;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,9 @@ class PagesController extends Controller
 
     public function Reports()
     {
-        return Inertia::render('Reports');
+        $orderSlips = OrderSlip::with('products')->get();
+        return Inertia::render('Reports', [
+            'orderSlips' => $orderSlips,
+        ]);
     }
 }
