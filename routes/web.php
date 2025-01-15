@@ -12,6 +12,9 @@ Route::get('/', [PagesController::class, 'Welcome'])->name('welcome');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('order-slip', OrderSlipController::class);
     Route::resource('product', ProductController::class);
+
+    Route::get('/reports', [PagesController::class, 'Reports'])->name('reports');
+
 });
 
 Route::middleware('auth')->group(function () {

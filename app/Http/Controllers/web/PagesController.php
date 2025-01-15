@@ -14,4 +14,9 @@ class PagesController extends Controller
             'canRegister' => Route::has('register'),
         ]);
     }
+
+    public function Reports()
+    {
+        return Inertia::render('Reports');
+    }
 }

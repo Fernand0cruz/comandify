@@ -50,7 +50,7 @@ import {
                 </li>
                 <li>
                     <a
-                        :href="route('product.index')"
+                        :href="route('reports')"
                         class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Book class="me-2" />
