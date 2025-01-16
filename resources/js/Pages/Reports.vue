@@ -1,10 +1,26 @@
 <script setup>
 import { ref } from "vue";
 import { Bar } from "vue-chartjs";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
+import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+} from "chart.js";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Link} from "@inertiajs/vue3";
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale
+);
 
 const props = defineProps({
     orderSlips: Array,
@@ -17,7 +33,14 @@ const getComandasAndSales = (orders, period) => {
     const periodData = {
         day: {
             start: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
-            end: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59),
+            end: new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate(),
+                23,
+                59,
+                59
+            ),
         },
         week: {
             start: new Date(now.setDate(now.getDate() - now.getDay())),
@@ -54,14 +77,21 @@ const getTopSellingProducts = (orders) => {
         order.products.forEach((product) => {
             const productId = product.id;
             if (!productSales[productId]) {
-                productSales[productId] = { name: product.name, totalSold: 0, totalRevenue: 0 };
+                productSales[productId] = {
+                    name: product.name,
+                    totalSold: 0,
+                    totalRevenue: 0,
+                };
             }
             productSales[productId].totalSold += product.pivot.quantity;
-            productSales[productId].totalRevenue += product.pivot.quantity * parseFloat(product.price);
+            productSales[productId].totalRevenue +=
+                product.pivot.quantity * parseFloat(product.price);
         });
     });
 
-    const sortedProducts = Object.values(productSales).sort((a, b) => b.totalSold - a.totalSold);
+    const sortedProducts = Object.values(productSales).sort(
+        (a, b) => b.totalSold - a.totalSold
+    );
 
     return sortedProducts.slice(0, 5);
 };
@@ -93,31 +123,40 @@ function formatCurrency(value) {
 }
 
 const comandasData = {
-    labels: ['Dia', 'Semana', 'Mês', 'Ano'],
+    labels: ["Dia", "Semana", "Mês", "Ano"],
     datasets: [
         {
-            label: 'Comandas',
-            data: [totalComandasDay, totalComandasWeek, totalComandasMonth, totalComandasYear],
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            label: "Comandas",
+            data: [
+                totalComandasDay,
+                totalComandasWeek,
+                totalComandasMonth,
+                totalComandasYear,
+            ],
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
             borderWidth: 1,
         },
     ],
 };
 
 const salesData = {
-    labels: ['Dia', 'Semana', 'Mês', 'Ano'],
+    labels: ["Dia", "Semana", "Mês", "Ano"],
     datasets: [
         {
-            label: 'Vendas',
-            data: [totalSalesDay, totalSalesWeek, totalSalesMonth, totalSalesYear],
-            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-            borderColor: 'rgba(153, 102, 255, 1)',
+            label: "Vendas",
+            data: [
+                totalSalesDay,
+                totalSalesWeek,
+                totalSalesMonth,
+                totalSalesYear,
+            ],
+            backgroundColor: "rgba(153, 102, 255, 0.2)",
+            borderColor: "rgba(153, 102, 255, 1)",
             borderWidth: 1,
         },
     ],
 };
-
 </script>
 
 <template>
@@ -125,6 +164,16 @@ const salesData = {
         <div class="container">
             <div class="mb-3">
                 <h2>Relatório</h2>
+                <p class="text-danger">
+                    É recomendado apagar os dados uma vez por ano (final do
+                    ano). Você pode fazer isso
+                    <Link
+                        :href="route('settings.index')"
+                        class="text-danger font-bold underline"
+                    >
+                        clicando aqui </Link
+                    >.
+                </p>
             </div>
             <div class="row g-3">
                 <div class="col-md-6 col-lg-3">
@@ -156,25 +205,33 @@ const salesData = {
                 <div class="col-md-6 col-lg-3">
                     <div class="card shadow-sm p-3">
                         <h5 class="card-title">Vendas no Dia</h5>
-                        <p class="card-text">{{ formatCurrency(totalSalesDay) }}</p>
+                        <p class="card-text">
+                            {{ formatCurrency(totalSalesDay) }}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="card shadow-sm p-3">
                         <h5 class="card-title">Vendas na Semana</h5>
-                        <p class="card-text">{{ formatCurrency(totalSalesWeek) }}</p>
+                        <p class="card-text">
+                            {{ formatCurrency(totalSalesWeek) }}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="card shadow-sm p-3">
                         <h5 class="card-title">Vendas no Mês</h5>
-                        <p class="card-text">{{ formatCurrency(totalSalesMonth) }}</p>
+                        <p class="card-text">
+                            {{ formatCurrency(totalSalesMonth) }}
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="card shadow-sm p-3">
                         <h5 class="card-title">Vendas no Ano</h5>
-                        <p class="card-text">{{ formatCurrency(totalSalesYear) }}</p>
+                        <p class="card-text">
+                            {{ formatCurrency(totalSalesYear) }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -205,10 +262,15 @@ const salesData = {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="product in topSellingProducts" :key="product.name">
+                            <tr
+                                v-for="product in topSellingProducts"
+                                :key="product.name"
+                            >
                                 <td>{{ product.name }}</td>
                                 <td>{{ product.totalSold }}</td>
-                                <td>{{ formatCurrency(product.totalRevenue) }}</td>
+                                <td>
+                                    {{ formatCurrency(product.totalRevenue) }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -173,7 +173,7 @@ function formatCurrency(value) {
                                     class="w-100"
                                     @click="openDeleteModal(orderSlip)"
                                 >
-                                    Finalizar Comanda
+                                    Encerar Comanda
                                 </PrimaryButton>
                             </div>
                         </div>

@@ -139,6 +139,6 @@ class OrderSlipController extends Controller
         $orderSlip->is_visible = false;
         $orderSlip->save();
 
-        return to_route('order-slip.index')->with('success', 'Comanda excluida com sucesso!');
+        return to_route('order-slip.index')->with('success', 'Comanda encerada com sucesso!');
     }
 }
