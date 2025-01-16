@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\PagesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SettingsController;
 
 
 Route::get('/', [PagesController::class, 'Welcome'])->name('welcome');
@@ -14,6 +15,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('product', ProductController::class);
 
     Route::get('/reports', [PagesController::class, 'Reports'])->name('reports');
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
 
 });
 
