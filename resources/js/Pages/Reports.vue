@@ -168,7 +168,7 @@ const salesData = {
                     É recomendado apagar os dados uma vez por ano (final do
                     ano). Você pode fazer isso
                     <Link
-                        :href="route('settings.index')"
+                        :href="route('settings')"
                         class="text-danger font-bold underline"
                     >
                         clicando aqui </Link
