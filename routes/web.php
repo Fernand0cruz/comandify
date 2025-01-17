@@ -14,8 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('order-slip', OrderSlipController::class);
     Route::resource('product', ProductController::class);
 
+    Route::get('/invoices', [PagesController::class,'Invoices'])->name('invoices');
     Route::get('/reports', [PagesController::class, 'Reports'])->name('reports');
-    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::get('/settings', [PagesController::class, 'Settings'])->name('settings');
 
 });
 

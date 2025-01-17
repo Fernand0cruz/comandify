@@ -59,7 +59,7 @@ import {
                 </li>
                 <li>
                     <a
-                        :href="route('product.index')"
+                        :href="route('invoices')"
                         class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Blinds class="me-2" />
@@ -80,7 +80,7 @@ import {
                 </li>
                 <li>
                     <a
-                        :href="route('settings.index')"
+                        :href="route('settings')"
                         class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Settings class="me-2" />

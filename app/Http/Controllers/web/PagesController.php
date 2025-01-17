@@ -23,4 +23,14 @@ class PagesController extends Controller
             'orderSlips' => $orderSlips,
         ]);
     }
+
+    public function Invoices()
+    {
+        return Inertia::render('Invoices');
+    }
+
+    public function Settings()
+    {
+        return Inertia::render('Settings');
+    }
 }
