@@ -11,7 +11,7 @@ import {
     LinearScale,
 } from "chart.js";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Link} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
 
 ChartJS.register(
     Title,
@@ -162,7 +162,7 @@ const salesData = {
 <template>
     <AuthenticatedLayout>
         <div class="container">
-            <div class="mb-3">
+            <div>
                 <h2>Relatório</h2>
                 <p class="text-danger">
                     É recomendado apagar os dados uma vez por ano (final do
@@ -236,7 +236,7 @@ const salesData = {
                 </div>
             </div>
 
-            <div class="row g-3 mt-4">
+            <div class="row g-3 mt-3">
                 <div class="col-md-6">
                     <div class="card shadow-sm p-3">
                         <h5 class="card-title">Comandas por Período</h5>
@@ -250,10 +250,11 @@ const salesData = {
                     </div>
                 </div>
             </div>
-            <div class="row g-3 mt-5">
-                <div class="col-12">
-                    <h4>Produtos Mais Vendidos</h4>
-                    <table class="table">
+
+            <div class="mt-3 card shadow-sm p-3">
+                <h4>Produtos Mais Vendidos</h4>
+                <div class="table-responsive">
+                    <table class="table align-middle">
                         <thead>
                             <tr>
                                 <th>Produto</th>
@@ -266,9 +267,9 @@ const salesData = {
                                 v-for="product in topSellingProducts"
                                 :key="product.name"
                             >
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.totalSold }}</td>
-                                <td>
+                                <td class="text-nowrap">{{ product.name }}</td>
+                                <td class="text-nowrap">{{ product.totalSold }}</td>
+                                <td class="text-nowrap">
                                     {{ formatCurrency(product.totalRevenue) }}
                                 </td>
                             </tr>

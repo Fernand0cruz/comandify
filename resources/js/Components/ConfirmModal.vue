@@ -23,7 +23,7 @@ const onCancel = () => emit("cancel");
         role="dialog" 
     >
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content rounded-0">
+            <div class="modal-content rounded-1">
                 <div class="modal-header">
                     <h5 class="modal-title">{{ title }}</h5>
                     <button type="button" class="btn-close" @click="onCancel" aria-label="Close"></button>

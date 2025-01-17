@@ -49,7 +49,7 @@ const submit = () => {
             <div class="mb-3">
                 <h2>Editar produto</h2>
             </div>
-            <div class="border p-4">
+            <div class="card shadow-sm p-4">
                 <form @submit.prevent="submit">
                     <div class="mb-3">
                         <InputLabel for="name" value="Nome" />

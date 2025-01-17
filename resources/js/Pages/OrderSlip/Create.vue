@@ -56,7 +56,7 @@ const submit = () => {
     <AuthenticatedLayout>
         <div class="container">
             <h2 class="mb-3">Criar Comanda</h2>
-            <div class="border p-4">
+            <div class="card shadow-sm p-4">
                 <form @submit.prevent="submit">
                     <div class="mb-3">
                         <InputLabel for="name" value="Nome do cliente" />

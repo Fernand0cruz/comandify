@@ -16,15 +16,15 @@ import {
 
 <template>
     <div
-        class="offcanvas offcanvas-start"
+        class="offcanvas offcanvas-start bg-dark"
         tabindex="-1"
         id="offcanvasScrolling"
     >
-        <div class="offcanvas-header d-flex justify-content-between">
+        <div class="offcanvas-header d-flex justify-content-between text-white">
             <div>
                 <span class="fw-bold fs-4">Comandify</span>
             </div>
-            <button type="button" class="btn" data-bs-dismiss="offcanvas">
+            <button type="button" class="btn text-white" data-bs-dismiss="offcanvas">
                 <X />
             </button>
         </div>
@@ -33,7 +33,7 @@ import {
                 <li>
                     <a
                         :href="route('order-slip.index')"
-                        class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
+                        class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <ListOrdered class="me-2" />
                         Comandas
@@ -42,7 +42,7 @@ import {
                 <li>
                     <a
                         :href="route('product.index')"
-                        class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
+                        class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <PackageSearch class="me-2" />
                         Produtos
@@ -51,7 +51,7 @@ import {
                 <li>
                     <a
                         :href="route('reports')"
-                        class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
+                        class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Book class="me-2" />
                         Relatório
@@ -60,7 +60,7 @@ import {
                 <li>
                     <a
                         :href="route('product.index')"
-                        class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
+                        class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Blinds class="me-2" />
                         Notas
@@ -72,7 +72,7 @@ import {
                 <li>
                     <a
                         :href="route('product.index')"
-                        class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
+                        class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <BadgeHelp class="me-2" />
                         Como usar
@@ -81,7 +81,7 @@ import {
                 <li>
                     <a
                         :href="route('settings.index')"
-                        class="btn btn-dark rounded-0 px-4 py-2 text-white text-start w-100 mb-2"
+                        class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Settings class="me-2" />
                         Configurações
@@ -113,7 +113,7 @@ import {
                 :href="route('logout')"
                 as="button"
                 method="post"
-                class="btn btn-dark border rounded-0 px-4 py-2 text-white"
+                class="btn btn-dark border rounded-1 px-4 py-2 text-white"
             >
                 <ArrowRightFromLine class="me-2" />
                 Sair

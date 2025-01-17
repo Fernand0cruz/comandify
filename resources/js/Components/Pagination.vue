@@ -18,7 +18,7 @@ const changePage = (page) => {
         <ul class="pagination">
             <li class="page-item" :class="{ disable: props.currentPage === 1 }">
                 <button
-                    class="page-link rounded-0 text-black"
+                    class="page-link text-black"
                     @click="changePage(props.currentPage - 1)"
                     :disabled="props.currentPage === 1"
                 >
@@ -54,7 +54,7 @@ const changePage = (page) => {
                 :class="{ disable: props.currentPage === props.lastPage }"
             >
                 <button
-                    class="page-link rounded-0 text-black"
+                    class="page-link text-black"
                     @click="changePage(props.currentPage + 1)"
                     :disabled="props.currentPage === props.lastPage"
                 >

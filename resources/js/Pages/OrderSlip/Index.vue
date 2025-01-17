@@ -84,7 +84,7 @@ function formatCurrency(value) {
                     <span>Comandas abertas: {{ props.orderSlips.length }}</span>
                     <Link
                         :href="route('order-slip.create')"
-                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
+                        class="inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                     >
                         <ClipboardCheck />
                         Criar Comanda
@@ -94,24 +94,24 @@ function formatCurrency(value) {
             <div v-if="props.orderSlips.length === 0">
                 Não há comandas abertas no momento.
             </div>
-            <div v-else class="row g-4">
+            <div v-else class="row g-3">
                 <div
-                    class="col-md-6 col-lg-4"
+                    class="col-md-12 col-lg-4"
                     v-for="(orderSlip, index) in props.orderSlips"
                     :key="index"
                 >
-                    <div>
+                    <div class="card shadow-sm p-3">
                         <div
-                            class="p-2 border-dark bg-dark text-white d-flex justify-content-between"
+                            class="bg-dark rounded-1 p-3 d-flex justify-content-between"
                         >
-                            <span class="fs-5 fw-bold">
+                            <span class="fs-5 fw-bold text-white">
                                 Comanda #{{ orderSlip.order_number }}
                             </span>
-                            <span class="fs-5 fw-bold">
+                            <span class="fs-5 fw-bold text-white">
                                 Mesa #{{ orderSlip.table_number }}
                             </span>
                         </div>
-                        <div class="border p-3">
+                        <div class="d-flex flex-column">
                             <span class="fs-5 fw-bold">
                                 {{ orderSlip.customer_name }}
                             </span>
@@ -120,7 +120,7 @@ function formatCurrency(value) {
                                 style="max-height: 200px; min-height: 200px"
                             >
                                 <li
-                                    class="py-1 border-bottom d-flex justify-content-between"
+                                    class="py-1 border-top d-flex justify-content-between"
                                     v-for="(
                                         product, index
                                     ) in orderSlip.products"
@@ -143,17 +143,17 @@ function formatCurrency(value) {
                                     >
                                 </li>
                             </ul>
-                            <div class="mb-3">
+                            <div>
                                 <h6>Observações:</h6>
                                 <div
-                                    class="border p-2 bg-light overflow-auto"
+                                    class="card shadow-sm bg-light overflow-auto"
                                     style="max-height: 150px; min-height: 150px"
                                 >
-                                    <p class="mb-0">{{ orderSlip.notes }}</p>
+                                    <p>{{ orderSlip.notes }}</p>
                                 </div>
                             </div>
                             <div
-                                class="d-flex justify-content-between align-items-center mb-3"
+                                class="d-flex justify-content-between align-items-center"
                             >
                                 <span class="fs-5 fw-bold">Total:</span>
                                 <span class="fs-5 fw-bold">{{
@@ -165,7 +165,7 @@ function formatCurrency(value) {
                                     :href="
                                         route('order-slip.edit', orderSlip.id)
                                     "
-                                    class="w-100 btn bg-dark inline-flex rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
+                                    class="w-100 btn bg-dark inline-flex rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                                 >
                                     Adicionar Produto
                                 </Link>

@@ -120,7 +120,7 @@ function formatCurrency(value) {
                     >
                     <Link
                         :href="route('product.create')"
-                        class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
+                        class="inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                     >
                         <ClipboardCheck />
                         Criar Produto
@@ -128,9 +128,9 @@ function formatCurrency(value) {
                 </div>
             </div>
 
-            <div class="table-responsive border">
-                <table class="table table-borderless table-hover align-middle">
-                    <thead class="table-light">
+            <div class="table-responsive card shadow-sm p-3">
+                <table class="table align-middle">
+                    <thead>
                         <tr>
                             <th>#xxx</th>
                             <th>Nome</th>
@@ -159,9 +159,7 @@ function formatCurrency(value) {
                             v-if="!loading"
                             v-for="(product, index) in translatedProducts"
                             :key="index"
-                            :class="{
-                                'table-danger': product.quantity === 0,
-                            }"
+                            
                         >
                             <td>#{{ (currentPage - 1) * 25 + index + 1 }}</td>
                             <td class="text-nowrap">{{ product.name }}</td>
@@ -193,9 +191,9 @@ function formatCurrency(value) {
                                     {{ product.quantity > 0 ? "Sim" : "Nao" }}
                                 </span>
                             </td>
-                            <td class="d-flex gap-3">
+                            <td>
                                 <Link
-                                    class="inline-flex btn btn-dark rounded-0 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
+                                    class="mx-3 inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                                     :href="route('product.edit', product.id)"
                                 >
                                     Editar
