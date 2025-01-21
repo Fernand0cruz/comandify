@@ -103,76 +103,82 @@ function formatCurrency(value) {
                 </div>
             </div>
 
-            <div class="mt-3 card shadow-sm p-4">
-                <span class="fs-5 fw-bold"> Adicionar produto(s) </span>
-                <div class="my-3">
-                    <TextInput
-                        id="name"
-                        type="text"
-                        class="form-control"
-                        v-model="searchQuery"
-                        placeholder="Buscar produto..."
-                    />
+            <div class="mt-3 card shadow-sm">
+                <div class="card-body">
+                    <span class="fs-5 fw-bold"> Adicionar produto(s) </span>
+                    <div class="my-3">
+                        <TextInput
+                            id="name"
+                            type="text"
+                            class="form-control"
+                            v-model="searchQuery"
+                            placeholder="Buscar produto..."
+                        />
+                    </div>
+                    <div
+                        class="table-responsive"
+                        style="max-height: 450px; min-height: 450px"
+                    >
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Preço</th>
+                                    <th>Disponível</th>
+                                    <th>Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="(product, index) in filteredProducts"
+                                    :key="index"
+                                >
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.quantity }}</td>
+                                    <td>{{ formatCurrency(product.price) }}</td>
+                                    <td>
+                                        <span
+                                            class="badge py-2 px-4 rounded-5"
+                                            :class="
+                                                product.quantity > 0
+                                                    ? 'bg-success'
+                                                    : 'bg-danger'
+                                            "
+                                        >
+                                            {{
+                                                product.quantity > 0
+                                                    ? "Sim"
+                                                    : "Nao"
+                                            }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            min="1"
+                                            :max="product.quantity"
+                                            v-model.number="
+                                                product.inputQuantity
+                                            "
+                                            @input="adjustQuantity(product)"
+                                            :placeholder="'Qtd'"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr v-if="filteredProducts.length === 0">
+                                    <td colspan="4" class="text-center">
+                                        Nenhum produto encontrado
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <PrimaryButton class="mt-3" @click="addProductsToOrderSlip">
+                        Adicionar Selecionados
+                    </PrimaryButton>
                 </div>
-                <div
-                    class="table-responsive"
-                    style="max-height: 450px; min-height: 450px"
-                >
-                    <table class="table align-middle">
-                        <thead>
-                            <tr>
-                                <th>Produto</th>
-                                <th>Quantidade</th>
-                                <th>Preço</th>
-                                <th>Disponível</th>
-                                <th>Quantidade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(product, index) in filteredProducts"
-                                :key="index"
-                            >
-                                <td>{{ product.name }}</td>
-                                <td>{{ product.quantity }}</td>
-                                <td>{{ formatCurrency(product.price) }}</td>
-                                <td>
-                                    <span
-                                        class="badge py-2 px-4 rounded-5"
-                                        :class="
-                                            product.quantity > 0
-                                                ? 'bg-success'
-                                                : 'bg-danger'
-                                        "
-                                    >
-                                        {{
-                                            product.quantity > 0 ? "Sim" : "Nao"
-                                        }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        min="1"
-                                        :max="product.quantity"
-                                        v-model.number="product.inputQuantity"
-                                        @input="adjustQuantity(product)"
-                                        :placeholder="'Qtd'"
-                                    />
-                                </td>
-                            </tr>
-                            <tr v-if="filteredProducts.length === 0">
-                                <td colspan="4" class="text-center">
-                                    Nenhum produto encontrado
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <PrimaryButton class="mt-3" @click="addProductsToOrderSlip">
-                    Adicionar Selecionados
-                </PrimaryButton>
             </div>
         </div>
     </AuthenticatedLayout>
