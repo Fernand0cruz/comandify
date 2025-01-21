@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('order-slip.index', absolute: false));
+        return redirect()->intended(route('order-slips.index', absolute: false));
     }
 
     /**

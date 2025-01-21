@@ -53,9 +53,9 @@ const cancelDelete = () => {
 
 const confirmDelete = () => {
     if (orderSlipToDelete.value) {
-        form.delete(route("order-slip.destroy", orderSlipToDelete.value.id), {
+        form.delete(route("order-slips.destroy", orderSlipToDelete.value.id), {
             onSuccess: () => {
-                form.get(route("order-slip.index"));
+                form.get(route("order-slips.index"));
                 orderSlipToDelete.value = null;
                 showToast(flash.value.success);
                 flash.value.success = null;
@@ -83,7 +83,7 @@ function formatCurrency(value) {
                 <div class="d-flex justify-content-between align-items-center">
                     <span>Comandas abertas: {{ props.orderSlips.length }}</span>
                     <Link
-                        :href="route('order-slip.create')"
+                        :href="route('order-slips.create')"
                         class="inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                     >
                         <ClipboardCheck />
@@ -163,7 +163,7 @@ function formatCurrency(value) {
                             <div class="d-flex gap-3">
                                 <Link
                                     :href="
-                                        route('order-slip.edit', orderSlip.id)
+                                        route('order-slips.edit', orderSlip.id)
                                     "
                                     class="w-100 btn bg-dark inline-flex rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                                 >

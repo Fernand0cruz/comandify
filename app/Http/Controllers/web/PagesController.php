@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 class PagesController extends Controller
 {
-    public function Welcome()
+    public function welcome()
     {
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
@@ -16,7 +16,7 @@ class PagesController extends Controller
         ]);
     }
 
-    public function Reports()
+    public function reports()
     {
         $orderSlips = OrderSlip::with('products')->get();
         return Inertia::render('Reports', [
@@ -24,12 +24,12 @@ class PagesController extends Controller
         ]);
     }
 
-    public function Invoices()
+    public function invoices()
     {
         return Inertia::render('Invoices');
     }
 
-    public function Settings()
+    public function settings()
     {
         return Inertia::render('Settings');
     }

@@ -67,7 +67,7 @@ const confirmDelete = () => {
     form.delete(route("product.destroy", productToDelete.value.id), {
         onStart: () => (loading.value = true),
         onSuccess: () => {
-            form.get(route("product.index"));
+            form.get(route("products.index"));
             showToast(flash.value?.success);
             closeDeleteModal();
         },
@@ -81,7 +81,7 @@ const confirmDelete = () => {
 
 const handlePageChange = (page) => {
     currentPage.value = page;
-    form.get(route("product.index", { page }), {
+    form.get(route("products.index", { page }), {
         onStart: () => (loading.value = true),
         onSuccess: ({ props }) => {
             products.value = props.products.data;
@@ -159,7 +159,6 @@ function formatCurrency(value) {
                             v-if="!loading"
                             v-for="(product, index) in translatedProducts"
                             :key="index"
-                            
                         >
                             <td>#{{ (currentPage - 1) * 25 + index + 1 }}</td>
                             <td class="text-nowrap">{{ product.name }}</td>
@@ -172,7 +171,9 @@ function formatCurrency(value) {
                                     {{ product.description }}
                                 </div>
                             </td>
-                            <td class="text-nowrap">{{formatCurrency(product.price)}}</td>
+                            <td class="text-nowrap">
+                                {{ formatCurrency(product.price) }}
+                            </td>
                             <td class="text-nowrap">
                                 <span>
                                     {{ product.category.name }}

@@ -2,11 +2,16 @@
 import DangerButton from "@/Components/DangerButton.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ConfirmModal from "@/Components/ConfirmModal.vue";
-import { ref } from "vue";
+import { ref, toRefs } from "vue";
 import { useForm } from "@inertiajs/vue3";
+import { toast } from "vue3-toastify";
+
+const props = defineProps({
+    flash: Object,
+});
 
 const isModalVisible = ref(false);
-const loading = ref(false);
+const { flash } = toRefs(props);
 
 const form = useForm({});
 
@@ -18,8 +23,29 @@ const closeDeleteModal = () => {
     isModalVisible.value = false;
 };
 
+const showToast = (message, type = "success") => {
+    const options = {
+        theme: "dark",
+        position: "bottom-center",
+        transition: "flip",
+    };
+    type === "success"
+        ? toast.success(message, options)
+        : toast.error(message, options);
+};
+
 const confirmDelete = () => {
-    
+    // form.delete(route('all-order-slips.delete'), {
+    form.delete(route("order-slips.delete-all"), {
+        onSuccess: () => {
+            showToast(flash.value?.success);
+            closeDeleteModal();
+        },
+        onError: (erro) => {
+            showToast("Ocorreu um erro. Por favor, tente novamente.", "error"),
+                console.error(erro);
+        },
+    });
 };
 </script>
 
@@ -29,7 +55,7 @@ const confirmDelete = () => {
             <div class="mb-3">
                 <h2>Configurações</h2>
             </div>
-            <div class="card shadow-sm p-3">
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Apagar comandas do sistema</h5>
                     <p class="card-text">

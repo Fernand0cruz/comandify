@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class OrderSlipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return Inertia::render('OrderSlip/Index', [
@@ -20,17 +17,11 @@ class OrderSlipController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return Inertia::render('OrderSlip/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -44,7 +35,7 @@ class OrderSlipController extends Controller
             ->exists();
 
         if ($tableOccupied) {
-            return to_route('order-slip.create')->with('error', 'Existe uma comanda aberta para esta mesa!');
+            return to_route('order-slips.create')->with('error', 'Existe uma comanda aberta para esta mesa!');
         }
 
         $yearMonth = date('Ym');
@@ -64,20 +55,14 @@ class OrderSlipController extends Controller
 
         OrderSlip::create($validatedData);
 
-        return to_route('order-slip.index')->with('success', 'Comanda criada com sucesso!');
+        return to_route('order-slips.index')->with('success', 'Comanda criada com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         return Inertia::render('OrderSlip/Edit', [
@@ -86,9 +71,6 @@ class OrderSlipController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
@@ -104,7 +86,7 @@ class OrderSlipController extends Controller
             $productModel = Product::findOrFail($product['product_id']);
 
             if ($productModel->quantity < $product['quantity']) {
-                return to_route('order-slip.index')->with('error', "Quantidade do produto {$productModel->name} inserido é inválida.");
+                return to_route('order-slips.index')->with('error', "Quantidade do produto {$productModel->name} inserido é inválida.");
             }
 
             if ($orderSlip->products->contains($product['product_id'])) {
@@ -128,17 +110,20 @@ class OrderSlipController extends Controller
 
         OrderSlip::where('id', $id)->update(['total_price' => $totalPrice]);
 
-        return to_route('order-slip.index')->with('success', 'Produto(s) adicionado(s) com sucesso!');
+        return to_route('order-slips.index')->with('success', 'Produto(s) adicionado(s) com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(OrderSlip $orderSlip)
     {
         $orderSlip->is_visible = false;
         $orderSlip->save();
 
-        return to_route('order-slip.index')->with('success', 'Comanda encerada com sucesso!');
+        return to_route('order-slips.index')->with('success', 'Comanda encerada com sucesso!');
+    }
+
+    public function deleteAll()
+    {
+        OrderSlip::query()->delete();
+        return to_route('settings')->with('success', 'Todas as comandas foram excluidas com sucesso!');
     }
 }

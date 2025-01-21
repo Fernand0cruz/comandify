@@ -36,7 +36,7 @@ const addProductsToOrderSlip = () => {
 
     form.products = dataToSend;
 
-    form.put(route("order-slip.update", props.orderSlip.id));
+    form.put(route("order-slips.update", props.orderSlip.id));
 
     props.products.forEach((product) => {
         product.inputQuantity = null;

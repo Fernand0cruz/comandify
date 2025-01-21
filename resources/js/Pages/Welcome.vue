@@ -24,7 +24,7 @@ defineProps({
                     <div class="d-flex gap-3">
                         <Link
                             v-if="$page.props.auth.user"
-                            :href="route('order-slip.index')"
+                            :href="route('order-slips.index')"
                             class="text-white text-decoration-none"
                         >
                             Dashboard

@@ -27,12 +27,15 @@ const showToast = (message, type = "success") => {
         : toast.error(message, options);
 };
 
-watch(() => flash.value, (value) => {
-    if (flash.value?.error) {
-        showToast(flash.value.error, "error");
-        value.error = null;
+watch(
+    () => flash.value,
+    (value) => {
+        if (flash.value?.error) {
+            showToast(flash.value.error, "error");
+            value.error = null;
+        }
     }
-});
+);
 
 const form = useForm({
     customer_name: "",
@@ -41,7 +44,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route("order-slip.store"), {
+    form.post(route("order-slips.store"), {
         onSuccess: () => {
             // form.reset();
         },

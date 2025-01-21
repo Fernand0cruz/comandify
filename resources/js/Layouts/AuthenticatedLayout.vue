@@ -24,7 +24,11 @@ import {
             <div>
                 <span class="fw-bold fs-4">Comandify</span>
             </div>
-            <button type="button" class="btn text-white" data-bs-dismiss="offcanvas">
+            <button
+                type="button"
+                class="btn text-white"
+                data-bs-dismiss="offcanvas"
+            >
                 <X />
             </button>
         </div>
@@ -32,7 +36,7 @@ import {
             <ul class="list-unstyled">
                 <li>
                     <a
-                        :href="route('order-slip.index')"
+                        :href="route('order-slips.index')"
                         class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <ListOrdered class="me-2" />
@@ -41,7 +45,7 @@ import {
                 </li>
                 <li>
                     <a
-                        :href="route('product.index')"
+                        :href="route('products.index')"
                         class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <PackageSearch class="me-2" />
@@ -71,7 +75,7 @@ import {
             <ul class="list-unstyled mt-auto">
                 <li>
                     <a
-                        :href="route('product.index')"
+                        :href="route('products.index')"
                         class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <BadgeHelp class="me-2" />

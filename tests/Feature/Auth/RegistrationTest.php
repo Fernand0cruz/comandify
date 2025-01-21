@@ -15,5 +15,5 @@ test('new users can register', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('order-slip.index', absolute: false));
+    $response->assertRedirect(route('order-slips.index', absolute: false));
 });

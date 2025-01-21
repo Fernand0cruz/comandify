@@ -51,7 +51,7 @@ class ProductController extends Controller
 
         Product::create($validatedData);
 
-        return to_route('product.index')->with('success', 'Produto criado com sucesso!');
+        return to_route('products.index')->with('success', 'Produto criado com sucesso!');
     }
 
     /**
@@ -89,7 +89,7 @@ class ProductController extends Controller
 
         $product->update($validatedData);
 
-        return to_route('product.index')->with('success', 'Produto atualizado com sucesso!');
+        return to_route('products.index')->with('success', 'Produto atualizado com sucesso!');
     }
 
     /**
@@ -99,6 +99,6 @@ class ProductController extends Controller
     {
         $product->delete();
 
-        return to_route('product.index')->with('success','Produto excluido com sucesso!');
+        return to_route('products.index')->with('success', 'Produto excluido com sucesso!');
     }
 }
