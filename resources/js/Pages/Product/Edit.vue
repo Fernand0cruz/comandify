@@ -38,7 +38,7 @@ const categories = ref(
 );
 
 const submit = () => {
-    form.put(route("product.update", props.product.id))
+    form.put(route("products.update", props.product.id))
 }
 
 </script>

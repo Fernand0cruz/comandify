@@ -64,7 +64,7 @@ const closeDeleteModal = () => {
 
 const confirmDelete = () => {
     if (!productToDelete.value) return;
-    form.delete(route("product.destroy", productToDelete.value.id), {
+    form.delete(route("products.destroy", productToDelete.value.id), {
         onStart: () => (loading.value = true),
         onSuccess: () => {
             form.get(route("products.index"));
@@ -119,7 +119,7 @@ function formatCurrency(value) {
                         >Produtos cadastrados: {{ props.products.total }}</span
                     >
                     <Link
-                        :href="route('product.create')"
+                        :href="route('products.create')"
                         class="inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                     >
                         <ClipboardCheck />
@@ -195,7 +195,7 @@ function formatCurrency(value) {
                             <td>
                                 <Link
                                     class="mx-3 inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
-                                    :href="route('product.edit', product.id)"
+                                    :href="route('products.edit', product.id)"
                                 >
                                     Editar
                                 </Link>
