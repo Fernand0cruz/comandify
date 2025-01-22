@@ -12,9 +12,7 @@ Route::get('/', [PagesController::class, 'Welcome'])->name('welcome');
 Route::middleware(['auth'])->group(function () {
     Route::resource('order-slips', OrderSlipController::class);
 
-    // Route::delete('/delete-all-order-slips', [OrderSlipController::class, 'deleteAll'])->name('all-order-slips.delete');
-    Route::delete('/order-slips/all', [OrderSlipController::class, 'deleteAll'])->name('order-slips.delete-all');
-
+    Route::delete('/delete-all-order-slips', [OrderSlipController::class, 'deleteAll'])->name('all-order-slips.delete');
 
     Route::resource('products', ProductController::class);
 

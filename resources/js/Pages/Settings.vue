@@ -5,6 +5,10 @@ import ConfirmModal from "@/Components/ConfirmModal.vue";
 import { ref, toRefs } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import TextInput from "@/Components/TextInput.vue";
+import InputError from "@/Components/InputError.vue"
 
 const props = defineProps({
     flash: Object,
@@ -13,7 +17,9 @@ const props = defineProps({
 const isModalVisible = ref(false);
 const { flash } = toRefs(props);
 
-const form = useForm({});
+const form = useForm({
+    companyName: ''
+});
 
 const openDeleteModal = () => {
     isModalVisible.value = true;
@@ -35,8 +41,7 @@ const showToast = (message, type = "success") => {
 };
 
 const confirmDelete = () => {
-    // form.delete(route('all-order-slips.delete'), {
-    form.delete(route("order-slips.delete-all"), {
+    form.delete(route("all-order-slips.delete"), {
         onSuccess: () => {
             showToast(flash.value?.success);
             closeDeleteModal();
@@ -47,6 +52,13 @@ const confirmDelete = () => {
         },
     });
 };
+
+const submit = () => {
+    console.log(
+        form.companyName
+    );
+    
+}
 </script>
 
 <template>
@@ -74,6 +86,36 @@ const confirmDelete = () => {
                 @confirm="confirmDelete"
                 @cancel="closeDeleteModal"
             />
+
+            <div class="card shadow-sm mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Mudar nome da empresa</h5>
+                    <p class="card-text">Mude o nome da empresa aqui!</p>
+                    <form @submit.prevent="submit">
+                        <div class="mb-3">
+                            <InputLabel for="companyName" value="Nome da empresa" />
+                            <TextInput
+                                id="companyName"
+                                type="text"
+                                class="form-control"
+                                v-model="form.companyName"
+                                required
+                                autofocus
+                            />
+                            <InputError
+                                class="mt-2 text-danger"
+                                :message="form.errors.companyName"
+                            />
+                        </div>
+
+                        <div class="mt-4">
+                            <PrimaryButton type="submit">
+                                Mudar nome
+                            </PrimaryButton>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
