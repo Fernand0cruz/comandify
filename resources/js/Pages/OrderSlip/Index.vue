@@ -91,7 +91,7 @@ function formatCurrency(value) {
                     </Link>
                 </div>
             </div>
-            <div v-if="props.orderSlips.length === 0">
+            <div class="card shadow-sm p-3" v-if="props.orderSlips.length === 0">
                 Não há comandas abertas no momento.
             </div>
             <div v-else class="row g-3">
