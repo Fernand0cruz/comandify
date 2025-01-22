@@ -12,17 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('company', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->default('Comandify');
             $table->timestamps();
         });
 
-        DB::table('categories')->insert([
-            ['name' => 'Appetizer'],
-            ['name' => 'Main_Course'],
-            ['name' => 'Dessert'],
-            ['name' => 'Beverage'],
+        DB::table('company')->insert([
+            'name' => 'Comandify',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('company');
     }
 };
