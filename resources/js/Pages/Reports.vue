@@ -273,6 +273,11 @@ const salesData = {
                                     {{ formatCurrency(product.totalRevenue) }}
                                 </td>
                             </tr>
+                            <tr v-if="topSellingProducts.length === 0">
+                                <td colspan="8" class="text-center text-muted p-3">
+                                    Nenhum produto vendido até o momento.
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
