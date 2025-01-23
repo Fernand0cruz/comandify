@@ -11,6 +11,7 @@ import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue"
 
 const props = defineProps({
+    Company: Object,
     flash: Object,
 });
 
@@ -18,7 +19,7 @@ const isModalVisible = ref(false);
 const { flash } = toRefs(props);
 
 const form = useForm({
-    companyName: ''
+    companyName: props.Company.name
 });
 
 const openDeleteModal = () => {

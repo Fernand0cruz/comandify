@@ -28,9 +28,4 @@ class PagesController extends Controller
     {
         return Inertia::render('Invoices');
     }
-
-    public function settings()
-    {
-        return Inertia::render('Settings');
-    }
 }

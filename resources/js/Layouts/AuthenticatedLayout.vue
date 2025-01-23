@@ -88,7 +88,7 @@ const companyName = (company.name).charAt(0).toUpperCase() + (company.name).slic
                 </li>
                 <li>
                     <a
-                        :href="route('settings')"
+                        :href="route('settings.index')"
                         class="btn btn-dark rounded-1 border px-4 py-2 text-white text-start w-100 mb-2"
                     >
                         <Settings class="me-2" />
