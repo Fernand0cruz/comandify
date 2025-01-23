@@ -101,7 +101,6 @@ const submit = () => {
                                 class="form-control"
                                 v-model="form.companyName"
                                 required
-                                autofocus
                             />
                             <InputError
                                 class="mt-2 text-danger"
