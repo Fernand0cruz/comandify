@@ -1,6 +1,6 @@
 <script setup>
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 import {
     Menu,
     ArrowRightFromLine,
@@ -12,6 +12,10 @@ import {
     BadgeHelp,
     Settings,
 } from "lucide-vue-next";
+
+const { props } = usePage();
+const company = props.company;
+const companyName = (company.name).charAt(0).toUpperCase() + (company.name).slice(1);
 </script>
 
 <template>
@@ -22,7 +26,7 @@ import {
     >
         <div class="offcanvas-header d-flex justify-content-between text-white">
             <div>
-                <span class="fw-bold fs-4">Comandify</span>
+                <span class="fw-bold fs-4"> {{ companyName }} </span>
             </div>
             <button
                 type="button"
@@ -110,7 +114,7 @@ import {
                     Menu
                 </PrimaryButton>
                 <div>
-                    <span class="fw-bold fs-4 text-white">Comandify</span>
+                    <span class="fw-bold fs-4 text-white"> {{ companyName }} </span>
                 </div>
             </div>
             <Link

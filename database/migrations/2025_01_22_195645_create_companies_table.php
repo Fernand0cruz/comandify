@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name')->default('Comandify');
             $table->timestamps();
         });
 
-        DB::table('company')->insert([
+        DB::table('companies')->insert([
             'name' => 'Comandify',
             'created_at' => now(),
             'updated_at' => now(),
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company');
+        Schema::dropIfExists('companies');
     }
 };
