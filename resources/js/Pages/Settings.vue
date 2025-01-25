@@ -19,7 +19,7 @@ const isModalVisible = ref(false);
 const { flash } = toRefs(props);
 
 const form = useForm({
-    companyName: props.Company.name
+    company_name: props.Company.name
 });
 
 const openDeleteModal = () => {
@@ -43,22 +43,24 @@ const showToast = (message, type = "success") => {
 
 const confirmDelete = () => {
     form.delete(route("all-order-slips.delete"), {
-        onSuccess: () => {
-            showToast(flash.value?.success);
-            closeDeleteModal();
-        },
         onError: (erro) => {
-            showToast("Ocorreu um erro. Por favor, tente novamente.", "error"),
-                console.error(erro);
+            if (erro.response.status !== 422) {
+                showToast("Ocorreu um erro. Por favor, tente novamente.", "error"),
+                    console.error(erro);
+            }
         },
     });
 };
 
 const submit = () => {
-    console.log(
-        form.companyName
-    );
-    
+    form.post(route("change-company-name"), {
+        onError: (erro) => {
+            if (erro.response.status !== 422) {
+                showToast("Ocorreu um erro. Por favor, tente novamente.", "error"),
+                    console.error(erro);
+            }
+        },
+    }); 
 }
 </script>
 
@@ -99,12 +101,12 @@ const submit = () => {
                                 id="companyName"
                                 type="text"
                                 class="form-control"
-                                v-model="form.companyName"
+                                v-model="form.company_name"
                                 required
                             />
                             <InputError
                                 class="mt-2 text-danger"
-                                :message="form.errors.companyName"
+                                :message="form.errors.company_name"
                             />
                         </div>
 
