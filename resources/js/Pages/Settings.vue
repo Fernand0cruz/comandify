@@ -2,7 +2,7 @@
 import DangerButton from "@/Components/DangerButton.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import ConfirmModal from "@/Components/ConfirmModal.vue";
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -12,11 +12,10 @@ import InputError from "@/Components/InputError.vue"
 
 const props = defineProps({
     Company: Object,
-    flash: Object,
 });
 
 const isModalVisible = ref(false);
-const { flash } = toRefs(props);
+
 
 const form = useForm({
     company_name: props.Company.name
@@ -30,19 +29,8 @@ const closeDeleteModal = () => {
     isModalVisible.value = false;
 };
 
-const showToast = (message, type = "success") => {
-    const options = {
-        theme: "dark",
-        position: "bottom-center",
-        transition: "flip",
-    };
-    type === "success"
-        ? toast.success(message, options)
-        : toast.error(message, options);
-};
-
 const confirmDelete = () => {
-    form.delete(route("all-order-slips.delete"), {
+    form.delete(route('delete-all-order-slips'), {
         onError: (erro) => {
             if (erro.response.status !== 422) {
                 showToast("Ocorreu um erro. Por favor, tente novamente.", "error"),
@@ -53,7 +41,7 @@ const confirmDelete = () => {
 };
 
 const submit = () => {
-    form.post(route("change-company-name"), {
+    form.post(route('change-company-name'), {
         onError: (erro) => {
             if (erro.response.status !== 422) {
                 showToast("Ocorreu um erro. Por favor, tente novamente.", "error"),

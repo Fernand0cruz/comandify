@@ -120,10 +120,4 @@ class OrderSlipController extends Controller
 
         return to_route('order-slips.index')->with('success', 'Comanda encerada com sucesso!');
     }
-
-    public function deleteAll()
-    {
-        OrderSlip::query()->delete();
-        return to_route('settings')->with('success', 'Todas as comandas foram excluidas com sucesso!');
-    }
 }
