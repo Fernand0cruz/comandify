@@ -18,7 +18,7 @@ class PagesController extends Controller
 
     public function reports()
     {
-        $orderSlips = OrderSlip::with('products')->get();
+        $orderSlips = OrderSlip::withTrashed()->with('products')->get();
         return Inertia::render('Reports', [
             'orderSlips' => $orderSlips,
         ]);

@@ -30,6 +30,7 @@ const orders = ref(props.orderSlips);
 
 const getComandasAndSales = (orders, period) => {
     const now = new Date();
+
     const periodData = {
         day: {
             start: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
@@ -43,16 +44,25 @@ const getComandasAndSales = (orders, period) => {
             ),
         },
         week: {
-            start: new Date(now.setDate(now.getDate() - now.getDay())),
-            end: new Date(now.setDate(now.getDate() + 6)),
+            start: (() => {
+                const startOfWeek = new Date(now);
+                startOfWeek.setDate(now.getDate() - now.getDay());
+                return startOfWeek;
+            })(),
+            end: (() => {
+                const endOfWeek = new Date(now);
+                endOfWeek.setDate(now.getDate() - now.getDay() + 6);
+                endOfWeek.setHours(23, 59, 59);
+                return endOfWeek;
+            })(),
         },
         month: {
             start: new Date(now.getFullYear(), now.getMonth(), 1),
-            end: new Date(now.getFullYear(), now.getMonth() + 1, 0),
+            end: new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59),
         },
         year: {
             start: new Date(now.getFullYear(), 0, 1),
-            end: new Date(now.getFullYear(), 11, 31),
+            end: new Date(now.getFullYear(), 11, 31, 23, 59, 59),
         },
     };
 
@@ -268,13 +278,18 @@ const salesData = {
                                 :key="product.name"
                             >
                                 <td class="text-nowrap">{{ product.name }}</td>
-                                <td class="text-nowrap">{{ product.totalSold }}</td>
+                                <td class="text-nowrap">
+                                    {{ product.totalSold }}
+                                </td>
                                 <td class="text-nowrap">
                                     {{ formatCurrency(product.totalRevenue) }}
                                 </td>
                             </tr>
                             <tr v-if="topSellingProducts.length === 0">
-                                <td colspan="8" class="text-center text-muted p-3">
+                                <td
+                                    colspan="8"
+                                    class="text-center text-muted p-3"
+                                >
                                     Nenhum produto vendido até o momento.
                                 </td>
                             </tr>
