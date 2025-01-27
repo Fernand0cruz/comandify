@@ -192,7 +192,7 @@ function formatCurrency(value) {
                                     {{ product.quantity > 0 ? "Sim" : "Nao" }}
                                 </span>
                             </td>
-                            <td>
+                            <td class="d-flex">
                                 <Link
                                     class="mx-3 inline-flex btn btn-dark rounded-1 items-center px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white"
                                     :href="route('products.edit', product.id)"
