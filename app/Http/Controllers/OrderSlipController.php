@@ -13,7 +13,7 @@ class OrderSlipController extends Controller
     public function index()
     {
         return Inertia::render('OrderSlip/Index', [
-            'orderSlips' => OrderSlip::with('products')->where('is_visible', true)->get(),
+            'orderSlips' => OrderSlip::with('products')->get(),
         ]);
     }
 
@@ -31,7 +31,6 @@ class OrderSlipController extends Controller
         ]);
 
         $tableOccupied = OrderSlip::where('table_number', $validatedData['table_number'])
-            ->where('is_visible', true)
             ->exists();
 
         if ($tableOccupied) {
@@ -40,7 +39,10 @@ class OrderSlipController extends Controller
 
         $yearMonth = date('Ym');
 
-        $lastOrderSlip = OrderSlip::where('order_number', 'like', $yearMonth . '%')->latest()->first();
+        $lastOrderSlip = OrderSlip::withTrashed()
+            ->where('order_number', 'like', $yearMonth . '%')
+            ->latest()
+            ->first();
 
         $nextNumber = 1;
 
@@ -115,7 +117,8 @@ class OrderSlipController extends Controller
 
     public function destroy(OrderSlip $orderSlip)
     {
-        $orderSlip->is_visible = false;
+        // $orderSlip->is_visible = false;
+        $orderSlip->delete();
         $orderSlip->save();
 
         return to_route('order-slips.index')->with('success', 'Comanda encerada com sucesso!');

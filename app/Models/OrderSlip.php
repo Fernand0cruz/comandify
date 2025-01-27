@@ -3,10 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderSlip extends Model
 {
-    protected $fillable = ['order_number', 'customer_name', 'table_number', 'notes', 'is_visible', 'total_price'];
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
+    protected $fillable = ['order_number', 'customer_name', 'table_number', 'notes', 'total_price'];
 
     public function products()
     {

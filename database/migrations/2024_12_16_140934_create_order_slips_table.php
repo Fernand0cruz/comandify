@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('customer_name');
             $table->integer('table_number');
             $table->text('notes')->nullable();
-            $table->boolean('is_visible')->default(true);
             $table->decimal('total_price', 10, 2)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
