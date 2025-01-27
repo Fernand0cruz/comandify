@@ -8,7 +8,7 @@ class DeleteAllOrderSlips extends Controller
 {
     public function __invoke()
     {
-        OrderSlip::query()->delete();
+        OrderSlip::query()->forceDelete();
         return to_route('order-slips.index')->with('success', 'Todas as comandas foram excluidas com sucesso!');
     }
 }
