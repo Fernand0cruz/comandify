@@ -16,14 +16,6 @@ class PagesController extends Controller
         ]);
     }
 
-    public function reports()
-    {
-        $orderSlips = OrderSlip::withTrashed()->with('products')->get();
-        return Inertia::render('Reports', [
-            'orderSlips' => $orderSlips,
-        ]);
-    }
-
     public function invoices()
     {
         return Inertia::render('Invoices');
