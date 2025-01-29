@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProducRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -39,15 +40,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProducRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:1|max:9999.99',
-            'quantity' => 'required|integer|min:1|max:999',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+        $validatedData = $request->validated();
 
         Product::create($validatedData);
 
@@ -77,15 +72,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:1|max:9999.99',
-            'quantity' => 'required|integer|min:1|max:999',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+        $validatedData = $request->validated();
 
         $product->update($validatedData);
 

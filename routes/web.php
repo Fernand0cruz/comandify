@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\RenderSettingsController;
 use App\Http\Controllers\DeleteAllOrderSlips;
 use App\Http\Controllers\OrderSlipController;
 use App\Http\Controllers\Web\PagesController;
@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/invoices', [PagesController::class, 'invoices'])->name('invoices');
     Route::get('/reports', RenderReportsController::class)->name('reports');
     
-    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+    Route::get('/settings', RenderSettingsController::class)->name('settings');
     Route::post('/settings/change-company-name', ChangeNameCompanyController::class)->name('change-company-name');
     Route::delete('/settings/delete-all-order-slips', DeleteAllOrderSlips::class)->name('delete-all-order-slips');
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrderSlipRequest;
+use App\Http\Requests\UpdateOrderSlipRequest;
 use App\Models\OrderSlip;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
 
@@ -22,13 +23,9 @@ class OrderSlipController extends Controller
         return Inertia::render('OrderSlip/Create');
     }
 
-    public function store(Request $request)
+    public function store(StoreOrderSlipRequest $request)
     {
-        $validatedData = $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'table_number' => 'required|integer|min:1',
-            'notes' => 'nullable|string',
-        ]);
+        $validatedData = $request->validated();
 
         $tableOccupied = OrderSlip::where('table_number', $validatedData['table_number'])
             ->exists();
@@ -73,14 +70,9 @@ class OrderSlipController extends Controller
         ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateOrderSlipRequest $request, string $id)
     {
-        $validatedData = $request->validate([
-            'products' => 'required|array',
-            'products.*.order_slip_id' => 'required|integer|exists:order_slips,id',
-            'products.*.product_id' => 'required|integer|exists:products,id',
-            'products.*.quantity' => 'required|integer|min:1',
-        ]);
+        $validatedData = $request->validated();
 
         $orderSlip = OrderSlip::findOrFail($id);
 
@@ -117,7 +109,6 @@ class OrderSlipController extends Controller
 
     public function destroy(OrderSlip $orderSlip)
     {
-        // $orderSlip->is_visible = false;
         $orderSlip->delete();
         $orderSlip->save();
 
