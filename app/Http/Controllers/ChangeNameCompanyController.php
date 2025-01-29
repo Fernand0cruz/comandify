@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangeNameCompanyRequest;
 use App\Models\Company;
-use Illuminate\Http\Request;
 
 class ChangeNameCompanyController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke(ChangeNameCompanyRequest $request)
     {
-        $validatedData = $request->validate([
-            'company_name' => 'required|string|min:3|max:255',
-        ]);
+        $validatedData = $request->validated();
 
         $company = Company::firstOrFail();
 
