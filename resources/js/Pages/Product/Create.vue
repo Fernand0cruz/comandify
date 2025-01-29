@@ -43,7 +43,7 @@ const submit = () => {
         },
         onError: (erro) => {
             console.error(erro);
-        }
+        },
     });
 };
 </script>

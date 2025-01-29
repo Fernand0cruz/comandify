@@ -146,7 +146,7 @@ function formatCurrency(value) {
                             <div>
                                 <h6>Observações:</h6>
                                 <div
-                                    class="card shadow-sm bg-light overflow-auto"
+                                    class="card shadow-sm bg-light p-3 overflow-auto"
                                     style="max-height: 150px; min-height: 150px"
                                 >
                                     <p>{{ orderSlip.notes }}</p>

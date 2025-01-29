@@ -44,8 +44,8 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric|min:1',
-            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:1|max:9999.99',
+            'quantity' => 'required|integer|min:1|max:999',
             'category_id' => 'required|exists:categories,id',
         ]);
 
@@ -82,8 +82,8 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric|min:1',
-            'quantity' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:1|max:9999.99',
+            'quantity' => 'required|integer|min:1|max:999',
             'category_id' => 'required|exists:categories,id',
         ]);
 

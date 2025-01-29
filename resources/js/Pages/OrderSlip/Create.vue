@@ -39,7 +39,7 @@ watch(
 
 const form = useForm({
     customer_name: "",
-    table_number: "",
+    table_number: 0,
     notes: "",
 });
 
@@ -84,6 +84,7 @@ const submit = () => {
                             class="form-control"
                             v-model="form.table_number"
                             required
+                            min="1"
                         />
                         <InputError
                             class="mt-2 text-danger"

@@ -26,7 +26,7 @@ class OrderSlipController extends Controller
     {
         $validatedData = $request->validate([
             'customer_name' => 'required|string|max:255',
-            'table_number' => 'required|integer',
+            'table_number' => 'required|integer|min:1',
             'notes' => 'nullable|string',
         ]);
 

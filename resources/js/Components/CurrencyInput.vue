@@ -1,45 +1,45 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, computed } from 'vue';
 
-const model = defineProps({
-    modelValue: {
-        type: [String, Number],
-        required: true,
-    },
-});
-
-const emit = defineEmits(["update:modelValue"]);
+const model = defineModel({
+    type: [String, Number],
+    required: true,
+}); 
 
 const input = ref(null);
 
-onMounted(() => {
-    if (input.value.hasAttribute("autofocus")) {
-        input.value.focus();
+const formattedValue = computed({
+    get: () => model.value ? formatCurrency(model.value) : '',
+    set: (val) => {
+        const numericValue = parseFloat(val.replace(/[^\d]/g, '')) / 100;
+        model.value = isNaN(numericValue) ? 0 : numericValue;
     }
 });
 
-defineExpose({
-    focus: () => input.value.focus(),
-});
+function formatCurrency(value) {
+    return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2
+    }).format(value);
+}
 
-const onInput = (event) => {
-    let value = event.target.value;
-    const numericValue = value.replace(/[^\d,]/g, "");
-    const formattedValue = numericValue.replace(",", ".");
-    emit("update:modelValue", parseFloat(formattedValue));
-};
+function preventNonNumeric(event) {
+    const allowedKeys = ["Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete"];
+    if (!/\d/.test(event.key) && !allowedKeys.includes(event.key)) {
+        event.preventDefault();
+    }
+}
 </script>
 
 <template>
     <input
+        type="text"
         class="form-control border rounded-0"
-        v-bind="model"
+        v-model="formattedValue"
         ref="input"
-        :value="model.modelValue"
-        @input="onInput"
-        v-mask="['R$ #,##', 'R$ ##,##', 'R$ ###,##', 'R$ #.###,##']"
-        placeholder="R$ 0,00"
         autocomplete="off"
+        placeholder="R$ 00,00"
+        @keypress="preventNonNumeric"
     />
 </template>
-

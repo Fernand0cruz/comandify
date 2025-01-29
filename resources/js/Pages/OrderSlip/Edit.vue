@@ -157,13 +157,13 @@ function formatCurrency(value) {
                                         <input
                                             type="number"
                                             class="form-control"
-                                            min="1"
                                             :max="product.quantity"
+                                            @input="adjustQuantity(product)"
                                             v-model.number="
                                                 product.inputQuantity
-                                            "
-                                            @input="adjustQuantity(product)"
-                                            :placeholder="'Qtd'"
+                                                "
+                                            placeholder="'Qtd'"
+                                            min="1"
                                         />
                                     </td>
                                 </tr>
