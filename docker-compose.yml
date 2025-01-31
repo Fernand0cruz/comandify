@@ -25,6 +25,8 @@ services:
             - mysql 
         networks:
             - app-network 
+        ports:
+            - "5173:5173"
     phpmyadmin:
         image: phpmyadmin 
         container_name: phpmyadmin 

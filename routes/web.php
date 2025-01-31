@@ -9,6 +9,7 @@ use App\Http\Controllers\OrderSlipController;
 use App\Http\Controllers\Web\PagesController;
 use App\Http\Controllers\RenderReportsController;
 use App\Http\Controllers\ChangeNameCompanyController;
+use App\Http\Controllers\RenderInvoicesController;
 
 Route::get('/', [PagesController::class, 'Welcome'])->name('welcome');
 
@@ -17,7 +18,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('products', ProductController::class);
     
-    Route::get('/invoices', [PagesController::class, 'invoices'])->name('invoices');
+    Route::get('/invoices', RenderInvoicesController::class)->name('invoices');
     Route::get('/reports', RenderReportsController::class)->name('reports');
     
     Route::get('/settings', RenderSettingsController::class)->name('settings');
