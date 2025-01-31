@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
-use App\Models\OrderSlip;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
