@@ -1,5 +1,9 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+
+const props = defineProps({
+    invoices: Object
+});
 </script>
 
 <template>
@@ -9,7 +13,11 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
                 <h2>Notas</h2>
             </div>
             <div class="card shadow-sm p-4">
-                testeee
+                <div v-for="(invoice, index) in props.invoices" :key="index">
+                    <ul>
+                        <li>{{  invoice.customer_name }}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </AuthenticatedLayout>
